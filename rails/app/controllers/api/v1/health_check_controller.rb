@@ -1,6 +1,6 @@
 class Api::V1::HealthCheckController < ApplicationController
     def index
-        binding.pry
+        #binding.pry
         render json: { message: "Success Health Check!" }, status: :ok
     end
 end

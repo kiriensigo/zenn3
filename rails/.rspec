@@ -1,2 +1,2 @@
---require rails_helper
---format documentation
+require rails_helper
+format documentation

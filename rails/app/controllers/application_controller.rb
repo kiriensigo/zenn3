@@ -1,2 +1,4 @@
 class ApplicationController < ActionController::API
-end
+    include DeviseTokenAuth::Concerns::SetUserByToken
+    include DeviseHackFakeSession
+  end

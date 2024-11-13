@@ -18,7 +18,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
         expect(res.keys).to eq ["articles", "meta"]
         expect(res["articles"].length).to eq 10
         expect(res["articles"][0].keys).to eq ["id", "title", "content", "status", "created_at", "from_today", "user"]
-        expect(res["articles"][0]["user"].keys).to match_array(["id", "name"])
+        expect(res["articles"][0]["user"].keys).to eq ["name"]
         expect(res["meta"].keys).to eq ["current_page", "total_pages"]
         expect(res["meta"]["current_page"]).to eq 1
         expect(res["meta"]["total_pages"]).to eq 3
@@ -35,7 +35,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
         expect(res.keys).to eq ["articles", "meta"]
         expect(res["articles"].length).to eq 10
         expect(res["articles"][0].keys).to eq ["id", "title", "content", "status", "created_at", "from_today", "user"]
-        expect(res["articles"][0]["user"].keys).to match_array(["id", "name"])  # 修正
+        expect(res["articles"][0]["user"].keys).to eq ["name"]
         expect(res["meta"].keys).to eq ["current_page", "total_pages"]
         expect(res["meta"]["current_page"]).to eq 2
         expect(res["meta"]["total_pages"]).to eq 3
@@ -59,7 +59,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
           subject
           res = JSON.parse(response.body)
           expect(res.keys).to eq ["id", "title", "content", "status", "created_at", "from_today", "user"]
-          expect(res["user"].keys).to match_array(["id", "name"])  # 修正
+          expect(res["user"].keys).to eq ["name"]
           expect(response).to have_http_status(:ok)
         end
       end

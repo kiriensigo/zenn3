@@ -1,15 +1,11 @@
-import {
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography,
-  Stack,
-} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Box, Container, TextField, Typography, Stack } from "@mui/material";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useUserState } from "@/hooks/useGlobalState";
 
 type SignInFormData = {
   email: string;
@@ -18,6 +14,8 @@ type SignInFormData = {
 
 const SignIn: NextPage = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useUserState();
 
   const { handleSubmit, control } = useForm<SignInFormData>({
     defaultValues: { email: "", password: "" },
@@ -38,6 +36,7 @@ const SignIn: NextPage = () => {
   };
 
   const onSubmit: SubmitHandler<SignInFormData> = (data) => {
+    setIsLoading(ture);
     const url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/sign_in";
     const headers = { "Content-Type": "application/json" };
 
@@ -46,10 +45,15 @@ const SignIn: NextPage = () => {
         localStorage.setItem("access-token", res.headers["access-token"]);
         localStorage.setItem("client", res.headers["client"]);
         localStorage.setItem("uid", res.headers["uid"]);
+        setUser({
+          ...user,
+          isFetched: false,
+        });
         router.push("/");
       })
       .catch((e: AxiosError<{ error: string }>) => {
         console.log(e.message);
+        setIsLoading(false);
       });
   };
 
@@ -100,13 +104,14 @@ const SignIn: NextPage = () => {
               />
             )}
           />
-          <Button
+          <LoadingButton
             variant="contained"
             type="submit"
+            loading={isLoading}
             sx={{ fontWeight: "bold", color: "white" }}
           >
             送信する
-          </Button>
+          </LoadingButton>
         </Stack>
       </Container>
     </Box>

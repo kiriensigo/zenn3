@@ -36,7 +36,7 @@ const SignIn: NextPage = () => {
   };
 
   const onSubmit: SubmitHandler<SignInFormData> = (data) => {
-    setIsLoading(ture);
+    setIsLoading(true);
     const url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/sign_in";
     const headers = { "Content-Type": "application/json" };
 

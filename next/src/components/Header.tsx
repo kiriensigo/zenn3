@@ -1,10 +1,36 @@
-import { AppBar, Box, Button, Container } from "@mui/material";
-import Image from "next/image";
+import ArticleIcon from '@mui/icons-material/Article'
+import Logout from '@mui/icons-material/Logout'
+import PersonIcon from '@mui/icons-material/Person'
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Divider,
+  IconButton,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  Typography,
+} from '@mui/material'import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { useUserState } from "@/hooks/useGlobalState";
 
 const Header = () => {
-  const [user] = useUserState();
+  const [user] = useRouter()
+  const [user] = useUserState()
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
   return (
     <AppBar
       position="static"
@@ -63,7 +89,15 @@ const Header = () => {
                   </Button>
                 </Box>
               )}
-              {user.isSignedIn && <Box>{user.name}</Box>}
+   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+   const open = Boolean(anchorEl)
+
+   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+     setAnchorEl(event.currentTarget)
+   }
+   const handleClose = () => {
+     setAnchorEl(null)
+   }
             </>
           )}
         </Box>

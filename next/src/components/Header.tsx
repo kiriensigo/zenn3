@@ -22,11 +22,13 @@ import { useState } from "react";
 import { useUserState } from "@/hooks/useGlobalState";
 
 const Header = () => {
-  const router = useRouter();
   const [user] = useUserState();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const router = useRouter();
+
+  const hideHeaderPathnames = ["/current/articles/edit/[id]"];
+  if (hideHeaderPathnames.includes(router.pathname)) return <></>;
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -96,20 +98,23 @@ const Header = () => {
                       Sign in
                     </Button>
                   </Link>
-                  <Button
-                    color="primary"
-                    variant="outlined"
-                    sx={{
-                      textTransform: "none",
-                      fontSize: 16,
-                      borderRadius: 2,
-                      boxShadow: "none",
-                      border: "1.5px solid #3EA8FF",
-                      ml: 2,
-                    }}
-                  >
-                    Sign up
-                  </Button>
+                  <Link href="/sign_up">
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      sx={{
+                        textTransform: "none",
+                        fontSize: 16,
+                        lineHeight: "27px",
+                        borderRadius: 2,
+                        boxShadow: "none",
+                        border: "1.5px solid #3EA8FF",
+                        ml: 2,
+                      }}
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
                 </Box>
               )}
               {user.isSignedIn && (

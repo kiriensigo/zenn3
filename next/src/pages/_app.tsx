@@ -7,11 +7,9 @@ import "@/styles/destyle.css";
 import CurrentUserFetch from "@/components/CurrentUserFetch";
 import Header from "@/components/Header";
 import Snackbar from "@/components/Snackbar";
-
 import createEmotionCache from "@/styles/createEmotionCache";
 import theme from "@/styles/theme";
 
-// Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
 interface MyAppProps extends AppProps {

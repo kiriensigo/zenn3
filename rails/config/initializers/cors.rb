@@ -7,7 +7,11 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins Settings.front_domain
+    # 本番環境では環境変数から取得、開発環境では設定ファイルから取得
+    front_domain = ENV['FRONT_DOMAIN'] || Settings.front_domain || 'http://localhost:8000'
+    
+    # 複数のドメインに対応（カンマ区切りで指定可能）
+    origins front_domain.split(',').map(&:strip)
 
     resource "*",
              headers: :any,

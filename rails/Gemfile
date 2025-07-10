@@ -40,6 +40,10 @@ gem "rack-cors"
 gem "rails", "~> 7.0.4"
 gem "base64"
 
+# Ruby 3.4.0移行のための互換性gem
+gem "bigdecimal"
+gem "mutex_m"
+
 # メッセージを日本語化
 gem "rails-i18n"
 

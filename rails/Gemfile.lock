@@ -76,6 +76,7 @@ GEM
     ast (2.4.3)
     base64 (0.3.0)
     bcrypt (3.1.20)
+    bigdecimal (3.2.2)
     bootsnap (1.18.6)
       msgpack (~> 1.2)
     builder (3.3.0)
@@ -164,6 +165,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.25.5)
     msgpack (1.8.0)
+    mutex_m (0.3.0)
     net-imap (0.5.9)
       date
       net-protocol
@@ -316,6 +318,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   base64
+  bigdecimal
   bootsnap
   bullet
   config
@@ -327,6 +330,7 @@ DEPENDENCIES
   faker
   kaminari
   letter_opener_web
+  mutex_m
   pg (~> 1.2)
   pry-byebug
   pry-doc

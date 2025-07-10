@@ -20,7 +20,7 @@ const ArticleCard = (props: ArticleCardProps) => {
             minHeight: 48,
             fontSize: 16,
             fontWeight: 'bold',
-            lineHeight: 1.5,
+            lineHeight: 1.5
           }}
         >
           {omit(props.title)(45)('...')}

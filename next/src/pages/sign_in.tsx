@@ -1,85 +1,85 @@
-import { LoadingButton } from "@mui/lab";
-import { Box, Container, TextField, Typography, Stack } from "@mui/material";
-import axios, { AxiosResponse, AxiosError } from "axios";
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { useUserState, useSnackbarState } from "@/hooks/useGlobalState";
+import { LoadingButton } from '@mui/lab'
+import { Box, Container, TextField, Typography, Stack } from '@mui/material'
+import axios, { AxiosResponse, AxiosError } from 'axios'
+import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+import { useUserState, useSnackbarState } from '@/hooks/useGlobalState'
 
 type SignInFormData = {
-  email: string;
-  password: string;
-};
+  email: string
+  password: string
+}
 
 const SignIn: NextPage = () => {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useUserState();
-  const [, setSnackbar] = useSnackbarState();
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+  const [user, setUser] = useUserState()
+  const [, setSnackbar] = useSnackbarState()
 
   const { handleSubmit, control } = useForm<SignInFormData>({
-    defaultValues: { email: "", password: "" },
-  });
+    defaultValues: { email: '', password: '' }
+  })
 
   const validationRules = {
     email: {
-      required: "メールアドレスを入力してください。",
+      required: 'メールアドレスを入力してください。',
       pattern: {
         value:
           /^[a-zA-Z0-9_+-]+(\.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/,
-        message: "正しい形式のメールアドレスを入力してください。",
-      },
+        message: '正しい形式のメールアドレスを入力してください。'
+      }
     },
     password: {
-      required: "パスワードを入力してください。",
-    },
-  };
+      required: 'パスワードを入力してください。'
+    }
+  }
 
   const onSubmit: SubmitHandler<SignInFormData> = (data) => {
-    setIsLoading(true);
-    const url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/sign_in";
-    const headers = { "Content-Type": "application/json" };
+    setIsLoading(true)
+    const url = process.env.NEXT_PUBLIC_API_BASE_URL + '/auth/sign_in'
+    const headers = { 'Content-Type': 'application/json' }
 
-    axios({ method: "POST", url: url, data: data, headers: headers })
+    axios({ method: 'POST', url: url, data: data, headers: headers })
       .then((res: AxiosResponse) => {
-        localStorage.setItem("access-token", res.headers["access-token"]);
-        localStorage.setItem("client", res.headers["client"]);
-        localStorage.setItem("uid", res.headers["uid"]);
+        localStorage.setItem('access-token', res.headers['access-token'])
+        localStorage.setItem('client', res.headers['client'])
+        localStorage.setItem('uid', res.headers['uid'])
         setUser({
           ...user,
-          isFetched: false,
-        });
+          isFetched: false
+        })
         setSnackbar({
-          message: "サインインに成功しました",
-          severity: "success",
-          pathname: "/",
-        });
-        router.push("/");
+          message: 'サインインに成功しました',
+          severity: 'success',
+          pathname: '/'
+        })
+        router.push('/')
       })
       .catch((e: AxiosError<{ error: string }>) => {
-        console.log(e.message);
+        console.log(e.message)
         setSnackbar({
-          message: "登録ユーザーが見つかりません",
-          severity: "error",
-          pathname: "/sign_in",
-        });
-        setIsLoading(false);
-      });
-  };
+          message: '登録ユーザーが見つかりません',
+          severity: 'error',
+          pathname: '/sign_in'
+        })
+        setIsLoading(false)
+      })
+  }
 
   return (
     <Box
       sx={{
-        backgroundColor: "#EDF2F7",
-        minHeight: "calc(100vh - 57px)",
+        backgroundColor: '#EDF2F7',
+        minHeight: 'calc(100vh - 57px)'
       }}
     >
       <Container maxWidth="sm">
         <Box sx={{ mb: 4, pt: 4 }}>
           <Typography
             component="h2"
-            sx={{ fontSize: 32, color: "black", fontWeight: "bold" }}
+            sx={{ fontSize: 32, color: 'black', fontWeight: 'bold' }}
           >
             Sign in
           </Typography>
@@ -96,7 +96,7 @@ const SignIn: NextPage = () => {
                 label="メールアドレス"
                 error={fieldState.invalid}
                 helperText={fieldState.error?.message}
-                sx={{ backgroundColor: "white" }}
+                sx={{ backgroundColor: 'white' }}
               />
             )}
           />
@@ -111,7 +111,7 @@ const SignIn: NextPage = () => {
                 label="パスワード"
                 error={fieldState.invalid}
                 helperText={fieldState.error?.message}
-                sx={{ backgroundColor: "white" }}
+                sx={{ backgroundColor: 'white' }}
               />
             )}
           />
@@ -119,14 +119,14 @@ const SignIn: NextPage = () => {
             variant="contained"
             type="submit"
             loading={isLoading}
-            sx={{ fontWeight: "bold", color: "white" }}
+            sx={{ fontWeight: 'bold', color: 'white' }}
           >
             送信する
           </LoadingButton>
         </Stack>
       </Container>
     </Box>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn

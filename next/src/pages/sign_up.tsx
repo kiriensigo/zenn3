@@ -1,98 +1,98 @@
-import { LoadingButton } from "@mui/lab";
-import { Box, Container, TextField, Typography, Stack } from "@mui/material";
-import axios, { AxiosResponse, AxiosError } from "axios";
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { useSnackbarState } from "@/hooks/useGlobalState";
-import { styles } from "@/styles";
+import { LoadingButton } from '@mui/lab'
+import { Box, Container, TextField, Typography, Stack } from '@mui/material'
+import axios, { AxiosResponse, AxiosError } from 'axios'
+import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+import { useSnackbarState } from '@/hooks/useGlobalState'
+import { styles } from '@/styles'
 
 type SignUpFormData = {
-  email: string;
-  password: string;
-  name: string;
-};
+  email: string
+  password: string
+  name: string
+}
 
 const SignUp: NextPage = () => {
-  const router = useRouter();
-  const [, setSnackbar] = useSnackbarState();
-  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter()
+  const [, setSnackbar] = useSnackbarState()
+  const [isLoading, setIsLoading] = useState(false)
 
   const { handleSubmit, control } = useForm<SignUpFormData>({
-    defaultValues: { email: "", password: "" },
-  });
+    defaultValues: { email: '', password: '' }
+  })
 
   const validationRules = {
     email: {
-      required: "メールアドレスを入力してください。",
+      required: 'メールアドレスを入力してください。',
       pattern: {
         value:
           /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/,
-        message: "正しい形式のメールアドレスを入力してください。",
-      },
+        message: '正しい形式のメールアドレスを入力してください。'
+      }
     },
     password: {
-      required: "パスワードを入力してください。",
+      required: 'パスワードを入力してください。'
     },
     name: {
-      required: "ユーザー名を入力してください。",
-    },
-  };
+      required: 'ユーザー名を入力してください。'
+    }
+  }
 
   const onSubmit: SubmitHandler<SignUpFormData> = (data) => {
     const SignUp = async (data: SignUpFormData) => {
-      setIsLoading(true);
-      const url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth";
-      const headers = { "Content-Type": "application/json" };
+      setIsLoading(true)
+      const url = process.env.NEXT_PUBLIC_API_BASE_URL + '/auth'
+      const headers = { 'Content-Type': 'application/json' }
       const confirmSuccessUrl =
-        process.env.NEXT_PUBLIC_FRONT_BASE_URL + "/sign_in";
+        process.env.NEXT_PUBLIC_FRONT_BASE_URL + '/sign_in'
 
       await axios({
-        method: "POST",
+        method: 'POST',
         url: url,
         data: { ...data, confirm_success_url: confirmSuccessUrl },
-        headers: headers,
+        headers: headers
       })
         .then((res: AxiosResponse) => {
           localStorage.setItem(
-            "access-token",
-            res.headers["access-token"] || ""
-          );
-          localStorage.setItem("client", res.headers["client"] || "");
-          localStorage.setItem("uid", res.headers["uid"] || "");
+            'access-token',
+            res.headers['access-token'] || ''
+          )
+          localStorage.setItem('client', res.headers['client'] || '')
+          localStorage.setItem('uid', res.headers['uid'] || '')
           setSnackbar({
-            message: "認証メールをご確認ください",
-            severity: "success",
-            pathname: "/",
-          });
-          router.push("/");
+            message: '認証メールをご確認ください',
+            severity: 'success',
+            pathname: '/'
+          })
+          router.push('/')
         })
         .catch((e: AxiosError<{ error: string }>) => {
-          console.log(e.message);
+          console.log(e.message)
           setSnackbar({
-            message: "不正なユーザー情報です",
-            severity: "error",
-            pathname: "/sign_up",
-          });
-          setIsLoading(false);
-        });
-    };
-    SignUp(data);
-  };
+            message: '不正なユーザー情報です',
+            severity: 'error',
+            pathname: '/sign_up'
+          })
+          setIsLoading(false)
+        })
+    }
+    SignUp(data)
+  }
 
   return (
     <Box
       css={styles.pageMinHeight}
       sx={{
-        backgroundColor: "#EDF2F7",
+        backgroundColor: '#EDF2F7'
       }}
     >
       <Container maxWidth="sm">
         <Box sx={{ mb: 4, pt: 4 }}>
           <Typography
             component="h2"
-            sx={{ fontSize: 32, color: "black", fontWeight: "bold" }}
+            sx={{ fontSize: 32, color: 'black', fontWeight: 'bold' }}
           >
             Sign Up
           </Typography>
@@ -114,7 +114,7 @@ const SignUp: NextPage = () => {
                 label="メールアドレス"
                 error={fieldState.invalid}
                 helperText={fieldState.error?.message}
-                sx={{ backgroundColor: "white" }}
+                sx={{ backgroundColor: 'white' }}
               />
             )}
           />
@@ -129,7 +129,7 @@ const SignUp: NextPage = () => {
                 label="パスワード"
                 error={fieldState.invalid}
                 helperText={fieldState.error?.message}
-                sx={{ backgroundColor: "white" }}
+                sx={{ backgroundColor: 'white' }}
               />
             )}
           />
@@ -144,7 +144,7 @@ const SignUp: NextPage = () => {
                 label="ユーザー名"
                 error={fieldState.invalid}
                 helperText={fieldState.error?.message}
-                sx={{ backgroundColor: "white" }}
+                sx={{ backgroundColor: 'white' }}
               />
             )}
           />
@@ -152,14 +152,14 @@ const SignUp: NextPage = () => {
             variant="contained"
             type="submit"
             loading={isLoading}
-            sx={{ fontWeight: "bold", color: "white" }}
+            sx={{ fontWeight: 'bold', color: 'white' }}
           >
             送信する
           </LoadingButton>
         </Stack>
       </Container>
     </Box>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

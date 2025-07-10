@@ -11,7 +11,7 @@ import {
   ListItem,
   ListItemText,
   Tooltip,
-  IconButton,
+  IconButton
 } from '@mui/material'
 import camelcaseKeys from 'camelcase-keys'
 import type { NextPage } from 'next'
@@ -42,7 +42,7 @@ const CurrentArticleDetail: NextPage = () => {
 
   const { data, error } = useSWR(
     user.isSignedIn && id ? url + id : null,
-    fetcher,
+    fetcher
   )
   if (error) return <Error />
   if (!data) return <Loading />
@@ -54,7 +54,7 @@ const CurrentArticleDetail: NextPage = () => {
       css={styles.pageMinHeight}
       sx={{
         backgroundColor: '#EDF2F7',
-        pb: 6,
+        pb: 6
       }}
     >
       <Box
@@ -63,7 +63,7 @@ const CurrentArticleDetail: NextPage = () => {
           backgroundColor: 'white',
           borderTop: '0.5px solid #acbcc7',
           height: 56,
-          color: '#6e7b85',
+          color: '#6e7b85'
         }}
       >
         <Container
@@ -72,7 +72,7 @@ const CurrentArticleDetail: NextPage = () => {
             display: 'flex',
             justifyContent: 'space-around',
             alignItems: 'center',
-            height: '100%',
+            height: '100%'
           }}
         >
           <Box sx={{ display: 'flex', gap: '0 8px' }}>
@@ -102,7 +102,7 @@ const CurrentArticleDetail: NextPage = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '0 8px',
-              m: 'auto',
+              m: 'auto'
             }}
           >
             <Box sx={{ width: 40, height: 40 }}>
@@ -122,7 +122,7 @@ const CurrentArticleDetail: NextPage = () => {
                 sx={{
                   fontSize: { xs: 21, sm: 25 },
                   fontWeight: 'bold',
-                  lineHeight: '40px',
+                  lineHeight: '40px'
                 }}
               >
                 {article.title}
@@ -135,10 +135,10 @@ const CurrentArticleDetail: NextPage = () => {
             sx={{
               display: {
                 xs: 'block',
-                lg: 'none',
+                lg: 'none'
               },
               color: '#6e7b85',
-              mt: '20px',
+              mt: '20px'
             }}
           >
             {article.createdAt}に公開
@@ -151,13 +151,13 @@ const CurrentArticleDetail: NextPage = () => {
                 boxShadow: 'none',
                 borderRadius: '12px',
                 maxWidth: 840,
-                m: '0 auto',
+                m: '0 auto'
               }}
             >
               <Box
                 sx={{
                   padding: { xs: '0 24px 24px 24px', sm: '0 40px 40px 40px' },
-                  marginTop: { xs: '24px', sm: '40px' },
+                  marginTop: { xs: '24px', sm: '40px' }
                 }}
               >
                 <MarkdownText content={article.content} />
@@ -168,7 +168,7 @@ const CurrentArticleDetail: NextPage = () => {
             sx={{
               display: { xs: 'none', lg: 'block' },
               width: 300,
-              minWidth: 300,
+              minWidth: 300
             }}
           >
             <Card sx={{ boxShadow: 'none', borderRadius: '12px' }}>
@@ -179,7 +179,7 @@ const CurrentArticleDetail: NextPage = () => {
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      width: '100%',
+                      width: '100%'
                     }}
                   >
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -199,7 +199,7 @@ const CurrentArticleDetail: NextPage = () => {
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      width: '100%',
+                      width: '100%'
                     }}
                   >
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>

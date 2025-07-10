@@ -12,7 +12,7 @@ export function useRequireSignedIn() {
       setSnackbar({
         message: 'サインインしてください',
         severity: 'error',
-        pathname: '/sign_in',
+        pathname: '/sign_in'
       })
       router.push('/sign_in')
     }

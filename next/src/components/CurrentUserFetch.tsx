@@ -18,28 +18,28 @@ const CurrentUserFetch = () => {
             'Content-Type': 'application/json',
             'access-token': localStorage.getItem('access-token'),
             client: localStorage.getItem('client'),
-            uid: localStorage.getItem('uid'),
-          },
+            uid: localStorage.getItem('uid')
+          }
         })
         .then((res: AxiosResponse) => {
           setUser({
             ...user,
             ...res.data,
             isSignedIn: true,
-            isFetched: true,
+            isFetched: true
           })
         })
         .catch((err: AxiosError<{ error: string }>) => {
           console.log(err.message)
           setUser({
             ...user,
-            isFetched: true,
+            isFetched: true
           })
         })
     } else {
       setUser({
         ...user,
-        isFetched: true,
+        isFetched: true
       })
     }
   }, [user, setUser])

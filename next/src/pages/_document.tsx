@@ -6,7 +6,7 @@ import Document, {
   Head,
   Main,
   NextScript,
-  DocumentInitialProps,
+  DocumentInitialProps
 } from 'next/document'
 import * as React from 'react'
 
@@ -71,8 +71,7 @@ MyDocument.getInitialProps = async (ctx): Promise<DocumentInitialProps> => {
       enhanceApp:
         (App: any) =>
         // eslint-disable-next-line react/display-name
-        (props): JSX.Element =>
-          <App emotionCache={cache} {...props} />,
+        (props): JSX.Element => <App emotionCache={cache} {...props} />
     })
 
   const initialProps = await Document.getInitialProps(ctx)
@@ -93,7 +92,7 @@ MyDocument.getInitialProps = async (ctx): Promise<DocumentInitialProps> => {
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...React.Children.toArray(initialProps.styles),
-      ...emotionStyleTags,
-    ],
+      ...emotionStyleTags
+    ]
   }
 }

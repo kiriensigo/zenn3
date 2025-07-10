@@ -1,6 +1,6 @@
-import ArticleIcon from "@mui/icons-material/Article";
-import Logout from "@mui/icons-material/Logout";
-import PersonIcon from "@mui/icons-material/Person";
+import ArticleIcon from '@mui/icons-material/Article'
+import Logout from '@mui/icons-material/Logout'
+import PersonIcon from '@mui/icons-material/Person'
 import {
   AppBar,
   Avatar,
@@ -12,66 +12,66 @@ import {
   Menu,
   MenuItem,
   ListItemIcon,
-  Typography,
-} from "@mui/material";
-import axios, { AxiosResponse, AxiosError } from "axios";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useUserState } from "@/hooks/useGlobalState";
+  Typography
+} from '@mui/material'
+import axios, { AxiosResponse, AxiosError } from 'axios'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useUserState } from '@/hooks/useGlobalState'
 
 const Header = () => {
-  const [user] = useUserState();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const router = useRouter();
+  const [user] = useUserState()
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const router = useRouter()
 
-  const hideHeaderPathnames = ["/current/articles/edit/[id]"];
-  if (hideHeaderPathnames.includes(router.pathname)) return <></>;
+  const hideHeaderPathnames = ['/current/articles/edit/[id]']
+  if (hideHeaderPathnames.includes(router.pathname)) return <></>
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   const addNewArticle = () => {
-    const url = process.env.NEXT_PUBLIC_API_BASE_URL + "/current/articles";
+    const url = process.env.NEXT_PUBLIC_API_BASE_URL + '/current/articles'
 
     const headers = {
-      "Content-Type": "application/json",
-      "access-token": localStorage.getItem("access-token"),
-      client: localStorage.getItem("client"),
-      uid: localStorage.getItem("uid"),
-    };
+      'Content-Type': 'application/json',
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid')
+    }
 
-    axios({ method: "POST", url: url, headers: headers })
+    axios({ method: 'POST', url: url, headers: headers })
       .then((res: AxiosResponse) => {
-        router.push("/current/articles/edit/" + res.data.id);
+        router.push('/current/articles/edit/' + res.data.id)
       })
       .catch((e: AxiosError<{ error: string }>) => {
-        console.log(e.message);
-      });
-  };
+        console.log(e.message)
+      })
+  }
 
   return (
     <AppBar
       position="static"
       sx={{
-        backgroundColor: "white",
-        color: "black",
-        boxShadow: "none",
-        py: "12px",
+        backgroundColor: 'white',
+        color: 'black',
+        boxShadow: 'none',
+        py: '12px'
       }}
     >
       <Container maxWidth="lg" sx={{ px: 2 }}>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
           }}
         >
           <Box>
@@ -88,11 +88,11 @@ const Header = () => {
                       color="primary"
                       variant="contained"
                       sx={{
-                        color: "white",
-                        textTransform: "none",
+                        color: 'white',
+                        textTransform: 'none',
                         fontSize: 16,
                         borderRadius: 2,
-                        boxShadow: "none",
+                        boxShadow: 'none'
                       }}
                     >
                       Sign in
@@ -103,13 +103,13 @@ const Header = () => {
                       color="primary"
                       variant="outlined"
                       sx={{
-                        textTransform: "none",
+                        textTransform: 'none',
                         fontSize: 16,
-                        lineHeight: "27px",
+                        lineHeight: '27px',
                         borderRadius: 2,
-                        boxShadow: "none",
-                        border: "1.5px solid #3EA8FF",
-                        ml: 2,
+                        boxShadow: 'none',
+                        border: '1.5px solid #3EA8FF',
+                        ml: 2
                       }}
                     >
                       Sign Up
@@ -118,7 +118,7 @@ const Header = () => {
                 </Box>
               )}
               {user.isSignedIn && (
-                <Box sx={{ display: "flex" }}>
+                <Box sx={{ display: 'flex' }}>
                   <IconButton onClick={handleClick} sx={{ p: 0 }}>
                     <Avatar>
                       <PersonIcon />
@@ -129,12 +129,12 @@ const Header = () => {
                       color="primary"
                       variant="contained"
                       sx={{
-                        color: "white",
-                        textTransform: "none",
+                        color: 'white',
+                        textTransform: 'none',
                         fontSize: 16,
                         borderRadius: 2,
                         width: 100,
-                        boxShadow: "none",
+                        boxShadow: 'none'
                       }}
                       onClick={addNewArticle}
                     >
@@ -149,7 +149,7 @@ const Header = () => {
                     onClick={handleClose}
                   >
                     <Box sx={{ pl: 2, py: 1 }}>
-                      <Typography sx={{ fontWeight: "bold" }}>
+                      <Typography sx={{ fontWeight: 'bold' }}>
                         {user.name}
                       </Typography>
                     </Box>
@@ -178,7 +178,7 @@ const Header = () => {
         </Box>
       </Container>
     </AppBar>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

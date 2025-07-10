@@ -21,7 +21,7 @@ const Confirmation: NextPage = () => {
           setSnackbar({
             message: '認証に成功しました',
             severity: 'success',
-            pathname: '/sign_in',
+            pathname: '/sign_in'
           })
           router.push('/sign_in')
         })
@@ -30,7 +30,7 @@ const Confirmation: NextPage = () => {
           setSnackbar({
             message: '不正なアクセスです',
             severity: 'error',
-            pathname: '/',
+            pathname: '/'
           })
           router.push('/')
         })
@@ -38,7 +38,7 @@ const Confirmation: NextPage = () => {
       setSnackbar({
         message: '不正なアクセスです',
         severity: 'error',
-        pathname: '/',
+        pathname: '/'
       })
       router.push('/')
     }

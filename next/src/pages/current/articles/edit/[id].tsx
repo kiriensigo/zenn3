@@ -9,7 +9,7 @@ import {
   Switch,
   TextField,
   Toolbar,
-  Typography,
+  Typography
 } from '@mui/material'
 import axios, { AxiosError } from 'axios'
 import type { NextPage } from 'next'
@@ -58,7 +58,7 @@ const CurrentArticlesEdit: NextPage = () => {
   const { id } = router.query
   const { data, error } = useSWR(
     user.isSignedIn && id ? url + id : null,
-    fetcher,
+    fetcher
   )
 
   const article: ArticleProps = useMemo(() => {
@@ -66,18 +66,18 @@ const CurrentArticlesEdit: NextPage = () => {
       return {
         title: '',
         content: '',
-        status: false,
+        status: false
       }
     }
     return {
       title: data.title == null ? '' : data.title,
       content: data.content == null ? '' : data.content,
-      status: data.status,
+      status: data.status
     }
   }, [data])
 
   const { handleSubmit, control, reset, watch } = useForm<ArticleFormData>({
-    defaultValues: article,
+    defaultValues: article
   })
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const CurrentArticlesEdit: NextPage = () => {
       return setSnackbar({
         message: '記事の保存にはタイトルが必要です',
         severity: 'error',
-        pathname: '/current/articles/edit/[id]',
+        pathname: '/current/articles/edit/[id]'
       })
     }
 
@@ -101,7 +101,7 @@ const CurrentArticlesEdit: NextPage = () => {
       return setSnackbar({
         message: '本文なしの記事は公開はできません',
         severity: 'error',
-        pathname: '/current/articles/edit/[id]',
+        pathname: '/current/articles/edit/[id]'
       })
     }
 
@@ -114,7 +114,7 @@ const CurrentArticlesEdit: NextPage = () => {
       'Content-Type': 'application/json',
       'access-token': localStorage.getItem('access-token'),
       client: localStorage.getItem('client'),
-      uid: localStorage.getItem('uid'),
+      uid: localStorage.getItem('uid')
     }
 
     const status = statusChecked ? 'published' : 'draft'
@@ -125,13 +125,13 @@ const CurrentArticlesEdit: NextPage = () => {
       method: 'PATCH',
       url: patchUrl,
       data: patchData,
-      headers: headers,
+      headers: headers
     })
       .then(() => {
         setSnackbar({
           message: '記事を保存しました',
           severity: 'success',
-          pathname: '/current/articles/edit/[id]',
+          pathname: '/current/articles/edit/[id]'
         })
       })
       .catch((err: AxiosError<{ error: string }>) => {
@@ -139,7 +139,7 @@ const CurrentArticlesEdit: NextPage = () => {
         setSnackbar({
           message: '記事の保存に失敗しました',
           severity: 'error',
-          pathname: '/current/articles/edit/[id]',
+          pathname: '/current/articles/edit/[id]'
         })
       })
     setIsLoading(false)
@@ -157,14 +157,14 @@ const CurrentArticlesEdit: NextPage = () => {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: '#EDF2F7',
+          backgroundColor: '#EDF2F7'
         }}
       >
         <Toolbar
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Box sx={{ width: 50 }}>
@@ -179,7 +179,7 @@ const CurrentArticlesEdit: NextPage = () => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              gap: { xs: '0 16px', sm: '0 24px' },
+              gap: { xs: '0 16px', sm: '0 24px' }
             }}
           >
             <Box sx={{ textAlign: 'center' }}>
@@ -207,7 +207,7 @@ const CurrentArticlesEdit: NextPage = () => {
               sx={{
                 color: 'white',
                 fontWeight: 'bold',
-                fontSize: { xs: 12, sm: 16 },
+                fontSize: { xs: 12, sm: 16 }
               }}
             >
               更新する
@@ -268,7 +268,7 @@ const CurrentArticlesEdit: NextPage = () => {
                 fontWeight: 'bold',
                 textAlign: 'center',
                 pt: 2,
-                pb: 4,
+                pb: 4
               }}
             >
               {watch('title')}
@@ -277,7 +277,7 @@ const CurrentArticlesEdit: NextPage = () => {
               <Box
                 sx={{
                   padding: { xs: '0 24px 24px 24px', sm: '0 40px 40px 40px' },
-                  marginTop: { xs: '24px', sm: '40px' },
+                  marginTop: { xs: '24px', sm: '40px' }
                 }}
               >
                 <MarkdownText content={watch('content')} />

@@ -1,5 +1,5 @@
-import type { NextPage } from "next";
-import SimpleButton from "@/components/SimpleButton";
+import type { NextPage } from 'next'
+import SimpleButton from '@/components/SimpleButton'
 
 const HelloWorld: NextPage = () => {
   return (
@@ -8,7 +8,7 @@ const HelloWorld: NextPage = () => {
       <p>content</p>
       <SimpleButton />
     </>
-  );
-};
+  )
+}
 
-export default HelloWorld;
+export default HelloWorld

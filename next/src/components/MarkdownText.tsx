@@ -13,7 +13,7 @@ const MarkdownText = (props: MarkdownTextProps) => {
       sx={{
         h1: { fontWeight: 'bold' },
         h2: { fontWeight: 'bold' },
-        h3: { fontWeight: 'bold' },
+        h3: { fontWeight: 'bold' }
       }}
     >
       <div dangerouslySetInnerHTML={{ __html: marked(props.content) }} />

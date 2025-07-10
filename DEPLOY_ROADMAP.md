@@ -49,7 +49,7 @@
     - **Environment**: `Ruby`
     - **Region**: データベースと同じリージョン
     - **Branch**: `main`
-    - **Build Command**: `bundle install; bundle exec rails db:migrate`
+    - **Build Command**: `bundle install; bundle exec rails -v; bundle exec rails db:migrate`
     - **Start Command**: `bundle exec puma -C config/puma.rb`
     - **Instance Type**: `Free`
     - **Environment Variables**:

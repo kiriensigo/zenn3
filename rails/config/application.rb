@@ -1,5 +1,8 @@
 require_relative "boot"
 
+# Fix for Ruby 3.3.4 Logger compatibility issue
+require "logger"
+
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
@@ -36,6 +39,6 @@ module Myapp
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.i18n.default_locale = :ja
-    config.i18n.load_path += Dir[Rails.root.join("config/loocales/**/*.yml").to_s]
+    config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml").to_s]
   end
 end

@@ -1,0 +1,3 @@
+Fix: Add x86_64-linux platform to Gemfile.lock
+
+- Added 'x86_64-linux' platform to rails/Gemfile.lock to support deployment on Linux-based environments like Render.

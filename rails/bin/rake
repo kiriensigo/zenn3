@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+# Fix for Ruby 3.3.4 Logger compatibility issue
+require "logger"
+
 require_relative "../config/boot"
 require "rake"
 Rake.application.run

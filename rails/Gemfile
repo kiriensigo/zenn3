@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) {|repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.2"
+ruby "3.3.4"
 
 # レスポンスJSONを制御する
 gem "active_model_serializers"
@@ -27,8 +27,8 @@ gem "enum_help"
 # ページネーション機能を提供する
 gem "kaminari"
 
-# MySQLに接続する
-gem "mysql2", "~> 0.5"
+# PostgreSQLに接続する
+gem "pg", "~> 1.2"
 
 # pumaサーバーを使えるようにする（標準gem）
 gem "puma", "~> 5.0"

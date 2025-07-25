@@ -15,7 +15,7 @@ import {
   Typography,
   IconButton
 } from '@mui/material'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 import type { NextPage } from 'next'
 import Link from 'next/link'
@@ -39,7 +39,9 @@ const CurrentArticles: NextPage = () => {
   const [user] = useUserState()
   const [, setSnackbar] = useSnackbarState()
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
-  const [articleToDelete, setArticleToDelete] = useState<ArticleProps | null>(null)
+  const [articleToDelete, setArticleToDelete] = useState<ArticleProps | null>(
+    null
+  )
 
   const url = process.env.NEXT_PUBLIC_API_BASE_URL + '/current/articles'
   const { data, error, mutate } = useSWR(user.isSignedIn ? url : null, fetcher)
@@ -60,7 +62,10 @@ const CurrentArticles: NextPage = () => {
         uid: localStorage.getItem('uid')
       }
 
-      const deleteUrl = process.env.NEXT_PUBLIC_API_BASE_URL + '/current/articles/' + articleToDelete.id
+      const deleteUrl =
+        process.env.NEXT_PUBLIC_API_BASE_URL +
+        '/current/articles/' +
+        articleToDelete.id
 
       await axios.delete(deleteUrl, { headers })
 
@@ -180,7 +185,7 @@ const CurrentArticles: NextPage = () => {
                 <Box>
                   <Avatar>
                     <Tooltip title="削除する">
-                      <IconButton 
+                      <IconButton
                         sx={{ backgroundColor: '#F1F5FA' }}
                         onClick={() => {
                           setArticleToDelete(article)
@@ -223,13 +228,10 @@ const CurrentArticles: NextPage = () => {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button 
-            onClick={() => setDeleteDialogOpen(false)}
-            color="inherit"
-          >
+          <Button onClick={() => setDeleteDialogOpen(false)} color="inherit">
             キャンセル
           </Button>
-          <Button 
+          <Button
             onClick={handleDeleteConfirm}
             color="error"
             variant="contained"

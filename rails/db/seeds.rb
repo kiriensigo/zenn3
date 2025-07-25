@@ -7,628 +7,599 @@ ActiveRecord::Base.transaction do
     end
   
     user1 = User.find_or_create_by(email: "test1@example.com") do |user|
-      user.name = "テスト太郎"
+      user.name = "テストユーザー1"
       user.password = "password"
       user.confirmed_at = Time.current
     end
   
     user2 = User.find_or_create_by(email: "test2@example.com") do |user|
-      user.name = "テスト次郎"
+      user.name = "テストユーザー2"
       user.password = "password"
       user.confirmed_at = Time.current
     end
   
-    # ポートフォリオ用記事
-    articles_data = [
+    # テストユーザー1の初学者向け記事
+    user1_articles = [
       {
-        title: "Next.js 14で学ぶApp Routerの実装パターン",
+        title: "プログラミング学習を始めて1ヶ月経った感想",
         content: <<~MARKDOWN
-          # Next.js 14のApp Routerを実際に使ってみた
+          # プログラミング学習を始めて1ヶ月
 
-          Next.js 13で導入されたApp Routerが、14でさらに安定してきました。実際にプロジェクトで使ってみて感じたメリットと実装パターンをまとめます。
+          こんにちは！プログラミング初学者です。
+          学習を始めて1ヶ月が経ったので、振り返りをしてみようと思います。
 
-          ## App Routerとは
+          ## なぜプログラミングを始めたか
 
-          従来のPages Routerに代わる新しいルーティングシステムです。
+          - 手に職をつけたい
+          - リモートワークで働きたい
+          - 作りたいWebサービスがある
 
-          ```typescript
-          // app/page.tsx
-          export default function HomePage() {
-            return <h1>ホームページ</h1>
-          }
+          ## 今月やったこと
+
+          ### HTML/CSSの基礎
+          - Progateで基本的な文法を学習
+          - 簡単な自己紹介サイトを作成
+
+          ```html
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>初めてのWebサイト</title>
+          </head>
+          <body>
+            <h1>こんにちは、世界！</h1>
+            <p>プログラミング楽しいです</p>
+          </body>
+          </html>
           ```
 
-          ## 学んだポイント
+          ### JavaScriptに挑戦
+          まだまだ難しいですが、少しずつ理解できるようになってきました。
 
-          ### 1. レイアウトの活用
-          ```typescript
-          // app/layout.tsx
-          export default function RootLayout({
-            children,
-          }: {
-            children: React.ReactNode
-          }) {
-            return (
-              <html lang="ja">
-                <body>
-                  <header>共通ヘッダー</header>
-                  {children}
-                </body>
-              </html>
-            )
+          ```javascript
+          function greet(name) {
+            console.log("こんにちは、" + name + "さん！");
           }
+
+          greet("世界");
           ```
 
-          ### 2. Loading UIの実装
-          ```typescript
-          // app/loading.tsx
-          export default function Loading() {
-            return <div>読み込み中...</div>
-          }
-          ```
+          ## 苦労していること
 
-          ## まとめ
+          - エラーメッセージの読み方がわからない
+          - どこから学習すればいいか迷う
+          - 挫折しそうになる時がある
 
-          App Routerは学習コストはありますが、コンポーネントベースのアプローチで直感的な開発ができます。特にTypeScriptとの相性が良く、型安全な開発が可能になりました。
+          ## 来月の目標
 
-          次回は実際のAPIとの連携について書く予定です。
+          - JavaScriptの基礎をもっと固める
+          - 簡単な電卓アプリを作る
+          - GitHubを使い始める
+
+          継続は力なり！頑張ります💪
         MARKDOWN
       },
       {
-        title: "TypeScriptの型定義で迷わないための実践的ガイド",
+        title: "初心者がJavaScriptで電卓を作ってみた",
         content: <<~MARKDOWN
-          # TypeScriptの型定義、これで迷わない！
+          # 初めての電卓アプリ作成
 
-          TypeScriptを書いていて「あれ、この型どう書くんだっけ？」と悩むことありませんか？
-          よく使う型定義パターンをまとめました。
+          プログラミング学習2ヶ月目の挑戦として、JavaScriptで電卓を作ってみました！
 
-          ## 基本的な型定義
+          ## 作ったもの
 
-          ### オブジェクトの型定義
-          ```typescript
-          interface User {
-            id: number
-            name: string
-            email: string
-            isActive: boolean
-          }
+          足し算、引き算、掛け算、割り算ができる簡単な電卓です。
 
-          // または type で定義
-          type UserType = {
-            id: number
-            name: string
-            email: string
-            isActive: boolean
-          }
-          ```
-
-          ## 実用的なパターン
-
-          ### APIレスポンスの型定義
-          ```typescript
-          interface ApiResponse<T> {
-            data: T
-            message: string
-            status: 'success' | 'error'
-          }
-
-          // 使用例
-          type UserResponse = ApiResponse<User>
-          ```
-
-          ### React Propsの型定義
-          ```typescript
-          interface ButtonProps {
-            children: React.ReactNode
-            onClick: () => void
-            variant?: 'primary' | 'secondary'
-            disabled?: boolean
-          }
-
-          const Button: React.FC<ButtonProps> = ({ 
-            children, 
-            onClick, 
-            variant = 'primary',
-            disabled = false 
-          }) => {
-            return (
-              <button 
-                onClick={onClick} 
-                disabled={disabled}
-                className={`btn btn-${variant}`}
-              >
-                {children}
-              </button>
-            )
-          }
-          ```
-
-          ## よく使うユーティリティ型
-
-          ### Pick / Omit
-          ```typescript
-          // 必要なプロパティだけ抽出
-          type UserSummary = Pick<User, 'id' | 'name'>
-
-          // 特定のプロパティを除外
-          type CreateUser = Omit<User, 'id'>
-          ```
-
-          ## まとめ
-
-          型定義はコードの品質向上に直結します。最初は複雑に感じるかもしれませんが、
-          パターンを覚えれば開発効率が大幅に向上します。
-
-          実際のプロジェクトで使いながら覚えていくのが一番です！
-        MARKDOWN
-      },
-      {
-        title: "Rails APIとNext.jsでJWT認証を実装した話",
-        content: <<~MARKDOWN
-          # Rails + Next.js でJWT認証を実装してみた
-
-          SPA（Single Page Application）での認証は悩ましい問題です。
-          今回はRails APIとNext.jsでJWT認証を実装した経験をシェアします。
-
-          ## なぜJWT認証を選んだか
-
-          - ステートレスなAPI設計が可能
-          - フロントエンドとバックエンドの分離がしやすい
-          - モバイルアプリでも同じAPIが使える
-
-          ## Rails側の実装
-
-          ### JWT生成用のヘルパー
-          ```ruby
-          # app/lib/json_web_token.rb
-          class JsonWebToken
-            SECRET_KEY = Rails.application.credentials.secret_key_base
-
-            def self.encode(payload, exp = 24.hours.from_now)
-              payload[:exp] = exp.to_i
-              JWT.encode(payload, SECRET_KEY)
-            end
-
-            def self.decode(token)
-              decoded = JWT.decode(token, SECRET_KEY)[0]
-              HashWithIndifferentAccess.new decoded
-            rescue JWT::DecodeError => e
-              raise ExceptionHandler::InvalidToken, e.message
-            end
-          end
-          ```
-
-          ### 認証コントローラー
-          ```ruby
-          class AuthController < ApplicationController
-            def login
-              @user = User.find_by(email: params[:email])
+          ### HTML部分
+          ```html
+          <div class="calculator">
+            <input type="text" id="display" readonly>
+            <div class="buttons">
+              <button onclick="clearDisplay()">C</button>
+              <button onclick="appendToDisplay('/')">/</button>
+              <button onclick="appendToDisplay('*')">*</button>
+              <button onclick="deleteLast()">←</button>
               
-              if @user&.authenticate(params[:password])
-                token = JsonWebToken.encode(user_id: @user.id)
-                render json: { token: token, user: @user }, status: :ok
-              else
-                render json: { error: 'Invalid credentials' }, status: :unauthorized
-              end
-            end
-          end
+              <button onclick="appendToDisplay('7')">7</button>
+              <button onclick="appendToDisplay('8')">8</button>
+              <button onclick="appendToDisplay('9')">9</button>
+              <button onclick="appendToDisplay('-')">-</button>
+              
+              <button onclick="appendToDisplay('4')">4</button>
+              <button onclick="appendToDisplay('5')">5</button>
+              <button onclick="appendToDisplay('6')">6</button>
+              <button onclick="appendToDisplay('+')">+</button>
+              
+              <button onclick="appendToDisplay('1')">1</button>
+              <button onclick="appendToDisplay('2')">2</button>
+              <button onclick="appendToDisplay('3')">3</button>
+              <button onclick="calculate()" rowspan="2">=</button>
+              
+              <button onclick="appendToDisplay('0')" colspan="2">0</button>
+              <button onclick="appendToDisplay('.')">.</button>
+            </div>
+          </div>
           ```
 
-          ## Next.js側の実装
-
-          ### トークンの保存と管理
-          ```typescript
-          // utils/auth.ts
-          export const setAuthToken = (token: string) => {
-            localStorage.setItem('authToken', token)
+          ### JavaScript部分
+          ```javascript
+          function appendToDisplay(value) {
+            document.getElementById('display').value += value;
           }
 
-          export const getAuthToken = (): string | null => {
-            return localStorage.getItem('authToken')
+          function clearDisplay() {
+            document.getElementById('display').value = '';
           }
 
-          export const removeAuthToken = () => {
-            localStorage.removeItem('authToken')
+          function deleteLast() {
+            let display = document.getElementById('display');
+            display.value = display.value.slice(0, -1);
           }
-          ```
 
-          ### APIクライアントの設定
-          ```typescript
-          // lib/apiClient.ts
-          import axios from 'axios'
-          import { getAuthToken } from '../utils/auth'
-
-          const apiClient = axios.create({
-            baseURL: process.env.NEXT_PUBLIC_API_URL,
-          })
-
-          apiClient.interceptors.request.use((config) => {
-            const token = getAuthToken()
-            if (token) {
-              config.headers.Authorization = `Bearer ${token}`
+          function calculate() {
+            let display = document.getElementById('display');
+            try {
+              display.value = eval(display.value);
+            } catch (error) {
+              display.value = 'エラー';
             }
-            return config
-          })
-
-          export default apiClient
+          }
           ```
 
-          ## セキュリティ考慮事項
+          ## 作成中に困ったこと
 
-          1. **トークンの有効期限**: 短めに設定（1時間程度）
-          2. **リフレッシュトークン**: 長期間のセッション維持
-          3. **HTTPS必須**: 本番環境では必ずHTTPS通信
-          4. **XSS対策**: トークンをlocalStorageに保存する際の注意
+          ### 1. ボタンが反応しない
+          最初、onclick属性を間違えて書いていました。
+          `onclick="function_name"` ではなく `onclick="function_name()"` が正しいと学びました。
 
-          ## 苦労した点
+          ### 2. CSSのレイアウト
+          ボタンを綺麗に並べるのに苦労しました。
+          Grid layoutを使って解決できました。
 
-          - トークンの自動更新タイミング
-          - ログアウト時のクリーンアップ
-          - サーバーサイドレンダリング時のトークン処理
-
-          ## まとめ
-
-          JWT認証は実装が少し複雑ですが、一度仕組みを理解すれば
-          柔軟性の高い認証システムが構築できます。
-
-          特にAPIファーストな開発では威力を発揮するのでおすすめです！
-        MARKDOWN
-      },
-      {
-        title: "Docker ComposeでRails開発環境を楽にセットアップ",
-        content: <<~MARKDOWN
-          # Docker ComposeでRails開発環境を構築してみた
-
-          新しいプロジェクトを始める度に環境構築で時間を取られていませんか？
-          Docker Composeを使ってRailsの開発環境を簡単にセットアップする方法をまとめました。
-
-          ## なぜDocker Compose？
-
-          - チーム内で環境を統一できる
-          - Ruby、Node.js、データベースのバージョン管理が楽
-          - 新メンバーのオンボーディングが早い
-
-          ## 構成ファイル
-
-          ### docker-compose.yml
-          ```yaml
-          version: '3.8'
-          services:
-            db:
-              image: postgres:14
-              environment:
-                POSTGRES_PASSWORD: password
-                POSTGRES_DB: myapp_development
-              ports:
-                - "5432:5432"
-              volumes:
-                - postgres_data:/var/lib/postgresql/data
-
-            web:
-              build: .
-              command: bundle exec rails server -b 0.0.0.0
-              volumes:
-                - .:/app
-              ports:
-                - "3000:3000"
-              depends_on:
-                - db
-              environment:
-                - DATABASE_URL=postgresql://postgres:password@db:5432/myapp_development
-
-          volumes:
-            postgres_data:
+          ```css
+          .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+          }
           ```
 
-          ### Dockerfile
-          ```dockerfile
-          FROM ruby:3.2
+          ### 3. エラーハンドリング
+          無効な計算式を入力した時にエラーになることがありました。
+          try-catchを使って対処しました。
 
-          WORKDIR /app
+          ## 学んだこと
 
-          # 依存関係のインストール
-          COPY Gemfile Gemfile.lock ./
-          RUN bundle install
+          - DOMの操作方法
+          - イベントハンドラーの使い方
+          - エラーハンドリングの重要性
+          - CSS GridLayout
 
-          # アプリケーションのコピー
-          COPY . .
+          ## 次の目標
 
-          EXPOSE 3000
+          - ToDoリストアプリを作る
+          - Reactの学習を始める
+          - GitHubにコードをアップする
 
-          CMD ["rails", "server", "-b", "0.0.0.0"]
-          ```
-
-          ## 便利なコマンド
-
-          ### 初回セットアップ
-          ```bash
-          # コンテナをビルドして起動
-          docker-compose up --build
-
-          # 別ターミナルでデータベース作成
-          docker-compose exec web rails db:create db:migrate
-          ```
-
-          ### 日常的な開発
-          ```bash
-          # コンテナ起動
-          docker-compose up
-
-          # Railsコンソール
-          docker-compose exec web rails console
-
-          # テスト実行
-          docker-compose exec web bundle exec rspec
-
-          # Gem追加後の再ビルド
-          docker-compose up --build
-          ```
-
-          ## ハマったポイント
-
-          ### 1. ファイル変更の反映
-          ```yaml
-          # volumes設定でホストとコンテナを同期
-          volumes:
-            - .:/app
-          ```
-
-          ### 2. データベース接続
-          ```ruby
-          # config/database.yml
-          development:
-            adapter: postgresql
-            encoding: unicode
-            host: db  # サービス名を指定
-            username: postgres
-            password: password
-            database: myapp_development
-          ```
-
-          ### 3. ポート競合
-          ```bash
-          # ローカルのPostgreSQLが動いている場合
-          sudo service postgresql stop
-          ```
-
-          ## カスタマイズ例
-
-          ### Redis追加
-          ```yaml
-          redis:
-            image: redis:7
-            ports:
-              - "6379:6379"
-          ```
-
-          ### Node.js環境追加
-          ```yaml
-          frontend:
-            image: node:18
-            working_dir: /app
-            volumes:
-              - ./frontend:/app
-            ports:
-              - "3001:3000"
-            command: npm run dev
-          ```
-
-          ## まとめ
-
-          Docker Composeを使うことで：
-          - 環境構築の時間を大幅短縮
-          - チーム開発での環境差異を解消
-          - 本番環境に近い環境でのテストが可能
-
-          最初のセットアップは少し手間ですが、一度作ってしまえば
-          新しいプロジェクトでもテンプレートとして使い回せます。
-
-          ぜひ試してみてください！
-        MARKDOWN
-      },
-      {
-        title: "GitHubActionsでRails+Next.jsのCI/CDパイプラインを構築",
-        content: <<~MARKDOWN
-          # GitHub ActionsでCI/CDを構築した話
-
-          個人プロジェクトでもちゃんとしたCI/CDパイプラインが欲しい！
-          GitHub Actionsを使ってRails + Next.jsプロジェクトのCI/CDを構築しました。
-
-          ## やりたかったこと
-
-          - プルリクエスト時の自動テスト
-          - mainブランチへのマージ時の自動デプロイ
-          - テストカバレッジの計測
-          - セキュリティスキャン
-
-          ## CI設定（テスト自動化）
-
-          ### .github/workflows/ci.yml
-          ```yaml
-          name: CI
-
-          on:
-            pull_request:
-              branches: [ main ]
-            push:
-              branches: [ main ]
-
-          jobs:
-            test-backend:
-              runs-on: ubuntu-latest
-              services:
-                postgres:
-                  image: postgres:14
-                  env:
-                    POSTGRES_PASSWORD: postgres
-                  options: >-
-                    --health-cmd pg_isready
-                    --health-interval 10s
-                    --health-timeout 5s
-                    --health-retries 5
-
-              steps:
-                - uses: actions/checkout@v3
-                
-                - name: Set up Ruby
-                  uses: ruby/setup-ruby@v1
-                  with:
-                    ruby-version: 3.2
-                    bundler-cache: true
-                    working-directory: ./backend
-
-                - name: Setup Database
-                  working-directory: ./backend
-                  env:
-                    DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
-                  run: |
-                    bundle exec rails db:create
-                    bundle exec rails db:migrate
-
-                - name: Run RSpec
-                  working-directory: ./backend
-                  env:
-                    DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
-                  run: bundle exec rspec
-
-            test-frontend:
-              runs-on: ubuntu-latest
-              steps:
-                - uses: actions/checkout@v3
-                
-                - name: Setup Node.js
-                  uses: actions/setup-node@v3
-                  with:
-                    node-version: '18'
-                    cache: 'npm'
-                    cache-dependency-path: ./frontend/package-lock.json
-
-                - name: Install dependencies
-                  working-directory: ./frontend
-                  run: npm ci
-
-                - name: Run ESLint
-                  working-directory: ./frontend
-                  run: npm run lint
-
-                - name: Run Tests
-                  working-directory: ./frontend
-                  run: npm run test
-
-                - name: Build
-                  working-directory: ./frontend
-                  run: npm run build
-          ```
-
-          ## CD設定（自動デプロイ）
-
-          ### .github/workflows/deploy.yml
-          ```yaml
-          name: Deploy
-
-          on:
-            push:
-              branches: [ main ]
-
-          jobs:
-            deploy:
-              runs-on: ubuntu-latest
-              needs: [test-backend, test-frontend]  # テスト通過が前提
-              
-              steps:
-                - uses: actions/checkout@v3
-
-                - name: Deploy to Render
-                  env:
-                    RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-                  run: |
-                    curl -X POST $RENDER_DEPLOY_HOOK_URL
-          ```
-
-          ## Secrets設定
-
-          GitHubリポジトリの設定で以下を追加：
-
-          ```
-          RENDER_DEPLOY_HOOK_URL: https://api.render.com/deploy/srv-xxxxx
-          DATABASE_URL: postgresql://...
-          ```
-
-          ## 工夫したポイント
-
-          ### 1. 並列実行でビルド時間短縮
-          ```yaml
-          jobs:
-            test-backend:
-              # バックエンドテスト
-            test-frontend:
-              # フロントエンドテスト（並列実行）
-          ```
-
-          ### 2. キャッシュ活用
-          ```yaml
-          - name: Setup Ruby
-            uses: ruby/setup-ruby@v1
-            with:
-              bundler-cache: true  # Gemキャッシュ
-              
-          - name: Setup Node.js
-            uses: actions/setup-node@v3
-            with:
-              cache: 'npm'  # npmキャッシュ
-          ```
-
-          ### 3. 失敗時の通知
-          ```yaml
-          - name: Notify on failure
-            if: failure()
-            uses: 8398a7/action-slack@v3
-            with:
-              status: failure
-              webhook_url: ${{ secrets.SLACK_WEBHOOK }}
-          ```
-
-          ## 導入効果
-
-          - **品質向上**: プルリク前に必ずテストが実行される
-          - **デプロイミス防止**: テスト失敗時はデプロイされない  
-          - **作業効率化**: 手動デプロイ作業がなくなった
-          - **安心感**: 自動化により人的ミスが減った
-
-          ## 今後の改善予定
-
-          - [ ] E2Eテストの追加
-          - [ ] パフォーマンステストの導入
-          - [ ] セキュリティスキャンの強化
-          - [ ] ステージング環境への自動デプロイ
-
-          ## まとめ
-
-          GitHub Actionsは無料枠でも十分実用的です。
-          個人プロジェクトでもCI/CDを導入することで、
-          開発の品質と効率が大幅に向上しました。
-
-          最初は簡単な設定から始めて、徐々に機能を追加していくのがおすすめです！
+          小さな成功体験を積み重ねていきたいと思います！
         MARKDOWN
       }
     ]
 
-    # ポートフォリオ用記事（重複チェック）
-    articles_data.each do |article_data|
-      Article.find_or_create_by(title: article_data[:title], user: portfolio_user) do |article|
+    # テストユーザー2の初学者向け記事  
+    user2_articles = [
+      {
+        title: "HTML/CSS学習で躓いたポイントと解決方法",
+        content: <<~MARKDOWN
+          # HTML/CSS学習での躓きポイント
+
+          プログラミング初学者の私が、HTML/CSS学習で実際に躓いたポイントと、
+          どうやって解決したかをまとめました。
+
+          ## 躓いたポイント1: 要素が思った位置に表示されない
+
+          ### 問題
+          divタグで作った要素が、思った位置に表示されない。
+
+          ```html
+          <div class="box1">ボックス1</div>
+          <div class="box2">ボックス2</div>
+          ```
+
+          ```css
+          .box1 {
+            width: 200px;
+            height: 100px;
+            background-color: red;
+          }
+
+          .box2 {
+            width: 200px;  
+            height: 100px;
+            background-color: blue;
+          }
+          ```
+
+          ### 解決方法
+          displayプロパティとpositionプロパティを理解することで解決！
+
+          ```css
+          .box1 {
+            display: inline-block; /* 横並びにしたい場合 */
+            width: 200px;
+            height: 100px;
+            background-color: red;
+          }
+
+          .box2 {
+            display: inline-block;
+            width: 200px;
+            height: 100px;
+            background-color: blue;
+          }
+          ```
+
+          ## 躓いたポイント2: 中央揃えができない
+
+          ### 問題
+          テキストや要素を中央に配置したいのに、うまくいかない。
+
+          ### 解決方法
+          Flexboxを使うと簡単！
+
+          ```css
+          .container {
+            display: flex;
+            justify-content: center; /* 水平方向の中央揃え */
+            align-items: center;     /* 垂直方向の中央揃え */
+            height: 100vh;           /* 画面全体の高さ */
+          }
+          ```
+
+          ## 躓いたポイント3: レスポンシブデザインがわからない
+
+          ### 問題
+          スマホで見ると表示が崩れる。
+
+          ### 解決方法
+          メディアクエリを使って、画面サイズごとにスタイルを変更。
+
+          ```css
+          /* PC用 */
+          .container {
+            width: 1200px;
+            margin: 0 auto;
+          }
+
+          /* タブレット用 */
+          @media (max-width: 768px) {
+            .container {
+              width: 100%;
+              padding: 0 20px;
+            }
+          }
+
+          /* スマホ用 */
+          @media (max-width: 480px) {
+            .container {
+              padding: 0 10px;
+            }
+          }
+          ```
+
+          ## 学習のコツ
+
+          ### 1. 手を動かす
+          理論だけでなく、実際にコードを書いて確認する。
+
+          ### 2. 検証ツールを使う
+          ブラウザの開発者ツール（F12）でスタイルを確認・編集。
+
+          ### 3. 小さなプロジェクトから始める
+          いきなり複雑なサイトを作ろうとせず、簡単なページから。
+
+          ## 参考にしたサイト
+
+          - MDN Web Docs
+          - Progate
+          - ドットインストール
+
+          最初は分からないことばかりですが、継続して学習していれば
+          必ずできるようになります！一緒に頑張りましょう💪
+        MARKDOWN
+      },
+      {
+        title: "プログラミング初学者がGitを使い始めるまで",
+        content: <<~MARKDOWN
+          # 初学者のGit入門体験記
+
+          プログラミングを始めて「Gitを使った方がいい」と聞くけれど、
+          何から始めればいいかわからない...そんな私のGit学習体験記です。
+
+          ## Gitって何？なぜ必要？
+
+          最初は全然わかりませんでしたが、調べてみると：
+
+          - **バージョン管理ツール**: コードの変更履歴を管理
+          - **バックアップ**: コードが消えても安心
+          - **協力開発**: チームでの開発に必須
+
+          要するに「コードの履歴を保存してくれる便利なツール」ということがわかりました。
+
+          ## GitHubアカウント作成
+
+          まずはGitHubでアカウントを作成しました。
+          無料プランで十分です！
+
+          ## 初めてのリポジトリ作成
+
+          ### 1. GitHubでリポジトリ作成
+          - Repository nameに「my-first-project」と入力
+          - Publicを選択（後で変更可能）
+          - 「Add a README file」にチェック
+
+          ### 2. ローカルにクローン
+          ```bash
+          git clone https://github.com/username/my-first-project.git
+          ```
+
+          最初はコマンドが怖かったですが、慣れてきました。
+
+          ## 基本的なGitコマンド
+
+          ### ファイルの変更を記録
+          ```bash
+          # 変更をステージに追加
+          git add .
+
+          # コミット（変更を記録）
+          git commit -m "初回コミット"
+
+          # GitHubにアップロード
+          git push
+          ```
+
+          ### 現在の状態確認
+          ```bash
+          # 変更状況を確認
+          git status
+
+          # コミット履歴を確認  
+          git log
+          ```
+
+          ## 実際にやってみたこと
+
+          ### 1. HTMLファイルを作成
+          ```html
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>私の初めてのWebサイト</title>
+          </head>
+          <body>
+            <h1>Hello, Git!</h1>
+            <p>Gitの練習をしています。</p>
+          </body>
+          </html>
+          ```
+
+          ### 2. Gitで管理
+          ```bash
+          git add index.html
+          git commit -m "HTMLファイルを追加"
+          git push
+          ```
+
+          ### 3. 変更を加える
+          ```html
+          <body>
+            <h1>Hello, Git!</h1>
+            <p>Gitの練習をしています。</p>
+            <p>2回目の変更です！</p> <!-- 追加 -->
+          </body>
+          ```
+
+          ```bash
+          git add index.html
+          git commit -m "説明文を追加"
+          git push
+          ```
+
+          ## 困ったこと・解決方法
+
+          ### 問題1: コミットメッセージを間違えた
+          → あとから修正できることを学習（まだ使っていませんが）
+
+          ### 問題2: プッシュができない
+          → リモートリポジトリが更新されていた
+          → `git pull`で最新版を取得してから`git push`
+
+          ### 問題3: ファイルを間違って削除
+          → Gitで管理していたおかげで復旧できました！
+
+          ## 学んだこと
+
+          - 小さな変更でもこまめにコミット
+          - コミットメッセージは分かりやすく
+          - バックアップの重要性
+
+          ## 次の目標
+
+          - ブランチの使い方を覚える
+          - プルリクエストを試してみる
+          - GitHubのIssue機能を使ってみる
+
+          Gitは最初こそ難しく感じましたが、慣れてくると
+          とても便利で安心してコーディングできます。
+
+          初学者の皆さん、一緒に頑張りましょう！
+        MARKDOWN
+      },
+      {
+        title: "初学者がBootstrapで簡単なWebサイトを作った話",
+        content: <<~MARKDOWN
+          # Bootstrapで初めてのレスポンシブサイト
+
+          CSS書くのって大変...そんな時に先輩から「Bootstrap使ってみたら？」と
+          アドバイスをもらい、初めて使ってみました！
+
+          ## Bootstrapとは？
+
+          調べてみると：
+          - **CSSフレームワーク**: 事前に用意されたスタイル
+          - **レスポンシブ対応**: スマホでも自動で見やすく
+          - **簡単**: クラスを指定するだけでおしゃれに
+
+          ## セットアップ
+
+          CDNを使って簡単にスタート！
+
+          ```html
+          <!DOCTYPE html>
+          <html lang="ja">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>私のポートフォリオ</title>
+            <!-- Bootstrap CSS -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+          </head>
+          <body>
+            <!-- コンテンツ -->
+            
+            <!-- Bootstrap JS -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+          </body>
+          </html>
+          ```
+
+          ## 実際に作ったサイト
+
+          ### ナビゲーションバー
+          ```html
+          <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+              <a class="navbar-brand" href="#">私のサイト</a>
+              <div class="navbar-nav">
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#projects">Projects</a>
+                <a class="nav-link" href="#contact">Contact</a>
+              </div>
+            </div>
+          </nav>
+          ```
+
+          ### ヒーローセクション
+          ```html
+          <section class="bg-light py-5">
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <h1 class="display-4">こんにちは！</h1>
+                  <p class="lead">プログラミング初学者です</p>
+                  <a href="#projects" class="btn btn-primary btn-lg">作品を見る</a>
+                </div>
+                <div class="col-md-6">
+                  <img src="profile.jpg" class="img-fluid rounded" alt="プロフィール">
+                </div>
+              </div>
+            </div>
+          </section>
+          ```
+
+          ### プロジェクト紹介
+          ```html
+          <section id="projects" class="py-5">
+            <div class="container">
+              <h2 class="text-center mb-5">作品紹介</h2>
+              <div class="row">
+                <div class="col-md-4 mb-4">
+                  <div class="card">
+                    <img src="project1.jpg" class="card-img-top" alt="プロジェクト1">
+                    <div class="card-body">
+                      <h5 class="card-title">電卓アプリ</h5>
+                      <p class="card-text">JavaScriptで作った簡単な電卓です。</p>
+                      <a href="#" class="btn btn-outline-primary">詳細を見る</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <div class="card">
+                    <img src="project2.jpg" class="card-img-top" alt="プロジェクト2">
+                    <div class="card-body">
+                      <h5 class="card-title">ToDoアプリ</h5>
+                      <p class="card-text">タスク管理ができるシンプルなアプリです。</p>
+                      <a href="#" class="btn btn-outline-primary">詳細を見る</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <div class="card">
+                    <img src="project3.jpg" class="card-img-top" alt="プロジェクト3">
+                    <div class="card-body">
+                      <h5 class="card-title">天気アプリ</h5>
+                      <p class="card-text">APIを使った天気予報アプリです。</p>
+                      <a href="#" class="btn btn-outline-primary">詳細を見る</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          ```
+
+          ## 使ってみて良かった点
+
+          ### 1. 速い！
+          自分でCSSを書くより断然早くできました。
+
+          ### 2. レスポンシブが簡単
+          `col-md-6`のようなクラスだけで、画面サイズに応じてレイアウトが変わります。
+
+          ### 3. 統一感がある
+          色やスタイルが統一されていて、見た目がプロっぽくなります。
+
+          ## 困ったこと
+
+          ### 1. カスタマイズが難しい
+          デフォルトのデザインから変更したい時に、CSSの知識が必要でした。
+
+          ### 2. クラス名を覚えるのが大変
+          最初はどのクラスを使えばいいかわからず、ドキュメントを見まくりました。
+
+          ## 今後の目標
+
+          - Bootstrap以外のフレームワークも試してみる（TailwindCSSなど）
+          - カスタムCSSとの組み合わせ方を覚える
+          - Sassを使ったBootstrapのカスタマイズ
+
+          ## 初学者へのアドバイス
+
+          - 最初は公式ドキュメントのサンプルをコピーして試してみる
+          - 小さなコンポーネントから始める
+          - レスポンシブの仕組みを理解する
+
+          Bootstrapのおかげで、見た目の良いサイトが簡単に作れました。
+          初学者にはとてもおすすめです！
+
+          まだまだ学ぶことは多いですが、楽しく続けていきたいと思います😊
+        MARKDOWN
+      }
+    ]
+
+    # テストユーザー1の記事作成
+    user1_articles.each do |article_data|
+      Article.find_or_create_by(title: article_data[:title], user: user1) do |article|
         article.content = article_data[:content]
         article.status = :published
       end
     end
-  
-    # テスト記事（重複チェック）
-    15.times do |i|
-      Article.find_or_create_by(title: "テストタイトル1-#{i}", user: user1) do |article|
-        article.content = "テスト本文1-#{i}"
-        article.status = :published
-      end
-      Article.find_or_create_by(title: "テストタイトル2-#{i}", user: user2) do |article|
-        article.content = "テスト本文2-#{i}"
+
+    # テストユーザー2の記事作成
+    user2_articles.each do |article_data|
+      Article.find_or_create_by(title: article_data[:title], user: user2) do |article|
+        article.content = article_data[:content]
         article.status = :published
       end
     end

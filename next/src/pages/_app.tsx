@@ -24,7 +24,8 @@ export default function MyApp(props: MyAppProps): JSX.Element {
   React.useEffect(() => {
     const warmupAPI = async () => {
       try {
-        await axios.get('/api/health_check', { timeout: 5000 })
+        const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL + '/api/v1/health_check'
+        await axios.get(apiUrl, { timeout: 5000 })
       } catch (error) {
         // エラーは無視（ヘルスチェック目的のため）
       }

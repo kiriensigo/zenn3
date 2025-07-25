@@ -1,15 +1,22 @@
 ActiveRecord::Base.transaction do
-    # ポートフォリオ閲覧用アカウント
-    portfolio_user = User.create!(
-      name: "ポートフォリオ閲覧者", 
-      email: "demo@example.com", 
-      password: "demo2025", 
-      confirmed_at: Time.current
-    )
+    # ポートフォリオ閲覧用アカウント（既存チェック）
+    portfolio_user = User.find_or_create_by(email: "demo@example.com") do |user|
+      user.name = "ポートフォリオ閲覧者"
+      user.password = "demo2025"
+      user.confirmed_at = Time.current
+    end
   
-    user1 = User.create!(name: "テスト太郎", email: "test1@example.com", password: "password", confirmed_at: Time.current)
+    user1 = User.find_or_create_by(email: "test1@example.com") do |user|
+      user.name = "テスト太郎"
+      user.password = "password"
+      user.confirmed_at = Time.current
+    end
   
-    user2 = User.create!(name: "テスト次郎", email: "test2@example.com", password: "password", confirmed_at: Time.current)
+    user2 = User.find_or_create_by(email: "test2@example.com") do |user|
+      user.name = "テスト次郎"
+      user.password = "password"
+      user.confirmed_at = Time.current
+    end
   
     # ポートフォリオ用記事
     articles_data = [
@@ -606,17 +613,23 @@ ActiveRecord::Base.transaction do
       }
     ]
 
+    # ポートフォリオ用記事（重複チェック）
     articles_data.each do |article_data|
-      Article.create!(
-        title: article_data[:title],
-        content: article_data[:content],
-        status: :published,
-        user: portfolio_user
-      )
+      Article.find_or_create_by(title: article_data[:title], user: portfolio_user) do |article|
+        article.content = article_data[:content]
+        article.status = :published
+      end
     end
   
+    # テスト記事（重複チェック）
     15.times do |i|
-      Article.create!(title: "テストタイトル1-#{i}", content: "テスト本文1-#{i}", status: :published, user: user1)
-      Article.create!(title: "テストタイトル2-#{i}", content: "テスト本文2-#{i}", status: :published, user: user2)
+      Article.find_or_create_by(title: "テストタイトル1-#{i}", user: user1) do |article|
+        article.content = "テスト本文1-#{i}"
+        article.status = :published
+      end
+      Article.find_or_create_by(title: "テストタイトル2-#{i}", user: user2) do |article|
+        article.content = "テスト本文2-#{i}"
+        article.status = :published
+      end
     end
   end

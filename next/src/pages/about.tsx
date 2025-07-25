@@ -16,9 +16,9 @@ const About: NextPage = () => {
           <Box sx={{ textAlign: 'center', mb: 4 }}>
             <Typography
               component="h1"
-              sx={{ 
-                fontSize: { xs: 28, md: 36 }, 
-                color: 'black', 
+              sx={{
+                fontSize: { xs: 28, md: 36 },
+                color: 'black',
                 fontWeight: 'bold',
                 mb: 2
               }}
@@ -26,7 +26,7 @@ const About: NextPage = () => {
               TechLogについて
             </Typography>
             <Typography
-              sx={{ 
+              sx={{
                 fontSize: { xs: 16, md: 18 },
                 color: '#666',
                 maxWidth: '600px',
@@ -40,11 +40,18 @@ const About: NextPage = () => {
           <Paper elevation={0} sx={{ p: 4, borderRadius: 2 }}>
             <Typography
               component="h2"
-              sx={{ fontSize: 24, fontWeight: 'bold', mb: 3, color: '#333' }}
+              sx={{
+                fontSize: 24,
+                fontWeight: 'bold',
+                mb: 3,
+                color: '#333'
+              }}
             >
               TechLogとは
             </Typography>
-            <Typography sx={{ fontSize: 16, lineHeight: 1.8, color: '#555', mb: 3 }}>
+            <Typography
+              sx={{ fontSize: 16, lineHeight: 1.8, color: '#555', mb: 3 }}
+            >
               TechLogは、エンジニアが学んだ技術や知見を気軽に共有できるプラットフォームです。
               プログラミング学習の記録から、実務で得た技術的洞察まで、
               あらゆる技術情報を記事として投稿・共有することができます。
@@ -58,13 +65,20 @@ const About: NextPage = () => {
           <Paper elevation={0} sx={{ p: 4, borderRadius: 2 }}>
             <Typography
               component="h2"
-              sx={{ fontSize: 24, fontWeight: 'bold', mb: 3, color: '#333' }}
+              sx={{
+                fontSize: 24,
+                fontWeight: 'bold',
+                mb: 3,
+                color: '#333'
+              }}
             >
               こんな方におすすめ
             </Typography>
             <Stack spacing={2}>
               <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                <Typography sx={{ color: '#3EA8FF', fontWeight: 'bold', mr: 2 }}>
+                <Typography
+                  sx={{ color: '#3EA8FF', fontWeight: 'bold', mr: 2 }}
+                >
                   ✓
                 </Typography>
                 <Typography sx={{ fontSize: 16, color: '#555' }}>
@@ -72,7 +86,9 @@ const About: NextPage = () => {
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                <Typography sx={{ color: '#3EA8FF', fontWeight: 'bold', mr: 2 }}>
+                <Typography
+                  sx={{ color: '#3EA8FF', fontWeight: 'bold', mr: 2 }}
+                >
                   ✓
                 </Typography>
                 <Typography sx={{ fontSize: 16, color: '#555' }}>
@@ -80,7 +96,9 @@ const About: NextPage = () => {
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                <Typography sx={{ color: '#3EA8FF', fontWeight: 'bold', mr: 2 }}>
+                <Typography
+                  sx={{ color: '#3EA8FF', fontWeight: 'bold', mr: 2 }}
+                >
                   ✓
                 </Typography>
                 <Typography sx={{ fontSize: 16, color: '#555' }}>
@@ -88,7 +106,9 @@ const About: NextPage = () => {
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                <Typography sx={{ color: '#3EA8FF', fontWeight: 'bold', mr: 2 }}>
+                <Typography
+                  sx={{ color: '#3EA8FF', fontWeight: 'bold', mr: 2 }}
+                >
                   ✓
                 </Typography>
                 <Typography sx={{ fontSize: 16, color: '#555' }}>
@@ -101,36 +121,68 @@ const About: NextPage = () => {
           <Paper elevation={0} sx={{ p: 4, borderRadius: 2 }}>
             <Typography
               component="h2"
-              sx={{ fontSize: 24, fontWeight: 'bold', mb: 3, color: '#333' }}
+              sx={{
+                fontSize: 24,
+                fontWeight: 'bold',
+                mb: 3,
+                color: '#333'
+              }}
             >
               特徴
             </Typography>
             <Stack spacing={3}>
               <Box>
-                <Typography sx={{ fontSize: 18, fontWeight: 'bold', mb: 1, color: '#333' }}>
+                <Typography
+                  sx={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    mb: 1,
+                    color: '#333'
+                  }}
+                >
                   シンプルな記事作成
                 </Typography>
-                <Typography sx={{ fontSize: 16, color: '#555', lineHeight: 1.7 }}>
+                <Typography
+                  sx={{ fontSize: 16, color: '#555', lineHeight: 1.7 }}
+                >
                   マークダウン記法で直感的に記事を作成できます。
                   コードブロックやリストなど、技術記事に必要な要素を簡単に記述できます。
                 </Typography>
               </Box>
-              
+
               <Box>
-                <Typography sx={{ fontSize: 18, fontWeight: 'bold', mb: 1, color: '#333' }}>
+                <Typography
+                  sx={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    mb: 1,
+                    color: '#333'
+                  }}
+                >
                   読みやすいデザイン
                 </Typography>
-                <Typography sx={{ fontSize: 16, color: '#555', lineHeight: 1.7 }}>
+                <Typography
+                  sx={{ fontSize: 16, color: '#555', lineHeight: 1.7 }}
+                >
                   技術記事に最適化されたデザインで、コードや図表が見やすく表示されます。
                   集中して学習できる環境を提供します。
                 </Typography>
               </Box>
-              
+
               <Box>
-                <Typography sx={{ fontSize: 18, fontWeight: 'bold', mb: 1, color: '#333' }}>
+                <Typography
+                  sx={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    mb: 1,
+                    color: '#333'
+                  }}
+                >
                   コミュニティ
                 </Typography>
-                <Typography sx={{ fontSize: 16, color: '#555', lineHeight: 1.7 }}>
+                <Typography
+                  sx={{ fontSize: 16, color: '#555', lineHeight: 1.7 }}
+                >
                   エンジニア同士で技術情報を共有し、お互いの成長をサポートする
                   コミュニティを目指しています。
                 </Typography>
@@ -138,16 +190,20 @@ const About: NextPage = () => {
             </Stack>
           </Paper>
 
-          <Paper elevation={0} sx={{ p: 4, borderRadius: 2, textAlign: 'center' }}>
+          <Paper
+            elevation={0}
+            sx={{ p: 4, borderRadius: 2, textAlign: 'center' }}
+          >
             <Typography
-              sx={{ 
-                fontSize: 18, 
+              sx={{
+                fontSize: 18,
                 color: '#555',
                 fontStyle: 'italic',
                 lineHeight: 1.8
               }}
             >
-              「学んだことを記録し、知識を共有する。」<br />
+              「学んだことを記録し、知識を共有する。」
+              <br />
               エンジニアの成長を支える技術記事プラットフォーム
             </Typography>
           </Paper>

@@ -3,13 +3,13 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 import { AppProps } from 'next/app'
 import * as React from 'react'
+import axios from 'axios'
 import '@/styles/destyle.css'
 import CurrentUserFetch from '@/components/CurrentUserFetch'
 import Header from '@/components/Header'
 import Snackbar from '@/components/Snackbar'
 import createEmotionCache from '@/styles/createEmotionCache'
 import theme from '@/styles/theme'
-import axios from 'axios'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -24,7 +24,8 @@ export default function MyApp(props: MyAppProps): JSX.Element {
   React.useEffect(() => {
     const warmupAPI = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL + '/api/v1/health_check'
+        const apiUrl =
+          process.env.NEXT_PUBLIC_API_BASE_URL + '/api/v1/health_check'
         await axios.get(apiUrl, { timeout: 5000 })
       } catch (error) {
         // エラーは無視（ヘルスチェック目的のため）

@@ -90,4 +90,58 @@
 
 ---
 
+---
+
+## 現在のデプロイ状況 (2025年1月25日更新)
+
+### ✅ 完了項目
+
+1. **Step 2完了: フロントエンド (Next.js) デプロイ**
+   - URL: https://zenn-clone-fornt.onrender.com
+   - 静的サイトとしてRenderで稼働中
+   - Next.js設定を静的エクスポート用に変更済み
+
+2. **Step 1完了: バックエンド (Rails API) デプロイ**
+   - URL: https://zenn-clone-api.onrender.com
+   - Neon PostgreSQLを使用（3GB無料枠）
+   - 接続文字列: `postgresql://neondb_owner:npg_3utJHXphl1KA@ep-flat-snow-a1urcdpu-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require`
+
+3. **Step 3完了: CORS設定**
+   - Rails API環境変数: `FRONT_DOMAIN=https://zenn-clone-fornt.onrender.com`
+   - フロントエンドとバックエンドの通信が正常に動作
+
+4. **ポートフォリオ用デモアカウント作成**
+   - 閲覧者向けのログイン情報を追加
+   - サンプル記事も投稿済み
+
+### 🔧 次に必要な作業
+
+1. **データベースのマイグレーションとシード実行**
+   ```bash
+   rails db:migrate
+   rails db:seed
+   ```
+
+2. **アプリケーション全体の動作確認**
+   - ユーザー登録・ログイン機能
+   - 記事投稿・編集機能
+   - 記事一覧・詳細表示
+
+---
+
+## ポートフォリオ閲覧用ログイン情報
+
+デモンストレーション用のアカウントを用意しています：
+
+**Email:** `demo@example.com`  
+**Password:** `demo2025`
+
+このアカウントでは以下の機能を確認できます：
+- ログイン機能
+- 記事投稿・編集機能
+- マークダウン記事の表示
+- Ruby on Railsに関するサンプル記事（5件）
+
+---
+
 以上でデプロイは完了です。Next.jsアプリのURLにアクセスして動作を確認してください。

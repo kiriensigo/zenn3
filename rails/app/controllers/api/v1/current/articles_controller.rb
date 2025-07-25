@@ -27,6 +27,12 @@ class Api::V1::Current::ArticlesController < Api::V1::BaseController
         render json: article
     end
 
+    def destroy
+      article = current_user.articles.find(params[:id])
+      article.destroy!
+      head :no_content
+    end
+
   private
 
     def article_params

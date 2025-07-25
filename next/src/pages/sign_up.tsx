@@ -94,7 +94,7 @@ const SignUp: NextPage = () => {
             component="h2"
             sx={{ fontSize: 32, color: 'black', fontWeight: 'bold' }}
           >
-            Sign Up
+            新規登録
           </Typography>
         </Box>
         <Stack

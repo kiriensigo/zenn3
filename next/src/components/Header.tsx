@@ -74,9 +74,25 @@ const Header = () => {
             alignItems: 'center'
           }}
         >
-          <Box>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Link href="/">
               <Image src="/logo.png" width={133} height={40} alt="logo" />
+            </Link>
+            <Link href="/about">
+              <Button
+                sx={{
+                  color: '#666',
+                  textTransform: 'none',
+                  fontSize: 16,
+                  ml: 3,
+                  '&:hover': {
+                    backgroundColor: 'transparent',
+                    color: '#3EA8FF'
+                  }
+                }}
+              >
+                About
+              </Button>
             </Link>
           </Box>
           {user.isFetched && (
@@ -95,7 +111,7 @@ const Header = () => {
                         boxShadow: 'none'
                       }}
                     >
-                      Sign in
+                      ログイン
                     </Button>
                   </Link>
                   <Link href="/sign_up">
@@ -112,7 +128,7 @@ const Header = () => {
                         ml: 2
                       }}
                     >
-                      Sign Up
+                      新規登録
                     </Button>
                   </Link>
                 </Box>
@@ -167,7 +183,7 @@ const Header = () => {
                         <ListItemIcon>
                           <Logout fontSize="small" />
                         </ListItemIcon>
-                        サインアウト
+                        ログアウト
                       </MenuItem>
                     </Link>
                   </Menu>

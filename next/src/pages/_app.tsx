@@ -9,6 +9,7 @@ import Header from '@/components/Header'
 import Snackbar from '@/components/Snackbar'
 import createEmotionCache from '@/styles/createEmotionCache'
 import theme from '@/styles/theme'
+import axios from 'axios'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -18,6 +19,26 @@ interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps): JSX.Element {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
+
+  // APIサーバーのウォームアップ（Renderのスリープ対策）
+  React.useEffect(() => {
+    const warmupAPI = async () => {
+      try {
+        await axios.get('/api/health_check', { timeout: 5000 })
+      } catch (error) {
+        // エラーは無視（ヘルスチェック目的のため）
+      }
+    }
+
+    // 初回ロード時にAPIを呼び出し
+    warmupAPI()
+
+    // 10分ごとにAPIを呼び出してスリープを防ぐ
+    const interval = setInterval(warmupAPI, 10 * 60 * 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>

@@ -51,7 +51,7 @@ const SignIn: NextPage = () => {
           isFetched: false
         })
         setSnackbar({
-          message: 'サインインに成功しました',
+          message: 'ログインに成功しました',
           severity: 'success',
           pathname: '/'
         })
@@ -81,7 +81,7 @@ const SignIn: NextPage = () => {
             component="h2"
             sx={{ fontSize: 32, color: 'black', fontWeight: 'bold' }}
           >
-            Sign in
+            ログイン
           </Typography>
         </Box>
         <Stack component="form" onSubmit={handleSubmit(onSubmit)} spacing={4}>

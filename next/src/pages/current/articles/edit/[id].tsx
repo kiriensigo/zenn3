@@ -231,7 +231,7 @@ const CurrentArticlesEdit: NextPage = () => {
                     type="text"
                     error={fieldState.invalid}
                     helperText={fieldState.error?.message}
-                    placeholder="Write in Title"
+                    placeholder="タイトルを入力してください"
                     fullWidth
                     sx={{ backgroundColor: 'white' }}
                   />
@@ -250,7 +250,7 @@ const CurrentArticlesEdit: NextPage = () => {
                     helperText={fieldState.error?.message}
                     multiline
                     fullWidth
-                    placeholder="Write in Markdown Text"
+                    placeholder="記事の内容をMarkdown形式で入力してください"
                     rows={25}
                     sx={{ backgroundColor: 'white' }}
                   />

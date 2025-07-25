@@ -154,7 +154,7 @@ const Header = () => {
                       }}
                       onClick={addNewArticle}
                     >
-                      Add new
+                      記事を書く
                     </Button>
                   </Box>
                   <Menu

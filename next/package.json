@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --dir src",
-    "format": "next lint --fix --dir src"
+    "format": "next lint --fix --dir src",
+    "export": "next build"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",

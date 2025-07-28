@@ -1,6 +1,7 @@
 import ArticleIcon from '@mui/icons-material/Article'
 import Logout from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
+import SettingsIcon from '@mui/icons-material/Settings'
 import {
   AppBar,
   Avatar,
@@ -136,8 +137,8 @@ const Header = () => {
               {user.isSignedIn && (
                 <Box sx={{ display: 'flex' }}>
                   <IconButton onClick={handleClick} sx={{ p: 0 }}>
-                    <Avatar>
-                      <PersonIcon />
+                    <Avatar src={user.image || undefined}>
+                      {!user.image && <PersonIcon />}
                     </Avatar>
                   </IconButton>
                   <Box sx={{ ml: 2 }}>
@@ -170,6 +171,14 @@ const Header = () => {
                       </Typography>
                     </Box>
                     <Divider />
+                    <Link href="/current/profile">
+                      <MenuItem>
+                        <ListItemIcon>
+                          <SettingsIcon fontSize="small" />
+                        </ListItemIcon>
+                        プロフィール設定
+                      </MenuItem>
+                    </Link>
                     <Link href="/current/articles">
                       <MenuItem>
                         <ListItemIcon>

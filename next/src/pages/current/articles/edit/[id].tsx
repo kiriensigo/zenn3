@@ -16,6 +16,7 @@ import {
 } from '@mui/material'
 import axios, { AxiosError } from 'axios'
 import type { NextPage } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useMemo, useRef } from 'react'
@@ -333,9 +334,11 @@ const CurrentArticlesEdit: NextPage = () => {
               </Box>
               {imagePreview && (
                 <Box sx={{ mt: 2 }}>
-                  <img
+                  <Image
                     src={imagePreview}
                     alt="プレビュー"
+                    width={300}
+                    height={200}
                     style={{
                       maxWidth: '300px',
                       maxHeight: '200px',

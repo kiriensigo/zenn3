@@ -1,3 +1,4 @@
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 import {
   Avatar,
   Box,
@@ -9,7 +10,6 @@ import {
   IconButton,
   Input
 } from '@mui/material'
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 import axios from 'axios'
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -32,7 +32,7 @@ const CurrentProfile: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const { handleSubmit, control, setValue, watch } = useForm<ProfileFormData>({
+  const { handleSubmit, control, setValue } = useForm<ProfileFormData>({
     defaultValues: {
       name: user.name,
       image: user.image || ''

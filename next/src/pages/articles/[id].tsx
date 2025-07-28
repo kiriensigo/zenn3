@@ -12,6 +12,7 @@ import {
 } from '@mui/material'
 import camelcaseKeys from 'camelcase-keys'
 import type { NextPage } from 'next'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import Error from '@/components/Error'
@@ -116,9 +117,11 @@ const ArticleDetail: NextPage = () => {
               >
                 {article.image && (
                   <Box sx={{ mb: 3, textAlign: 'center' }}>
-                    <img
+                    <Image
                       src={article.image}
                       alt={article.title}
+                      width={600}
+                      height={400}
                       style={{
                         maxWidth: '100%',
                         height: 'auto',

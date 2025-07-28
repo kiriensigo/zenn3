@@ -41,31 +41,34 @@ const Index: NextPage = () => {
     <>
       <Head>
         <title>TechLog - エンジニアのための技術ナレッジシェア</title>
-        <meta name="description" content="エンジニアが学んだ技術や知見を気軽に共有できるプラットフォーム" />
+        <meta
+          name="description"
+          content="エンジニアが学んだ技術や知見を気軽に共有できるプラットフォーム"
+        />
       </Head>
       <Box css={styles.pageMinHeight} sx={{ backgroundColor: '#e6f2ff' }}>
-      <Container maxWidth="md" sx={{ pt: 6 }}>
-        <Grid container spacing={4}>
-          {articles.map((article: ArticleProps, i: number) => (
-            <Grid key={i} item xs={12} md={6}>
-              <Link href={'/articles/' + article.id}>
-                <ArticleCard
-                  title={article.title}
-                  fromToday={article.fromToday}
-                  userName={article.user.name}
-                />
-              </Link>
-            </Grid>
-          ))}
-        </Grid>
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
-          <Pagination
-            count={meta.totalPages}
-            page={meta.currentPage}
-            onChange={handleChange}
-          />
-        </Box>
-      </Container>
+        <Container maxWidth="md" sx={{ pt: 6 }}>
+          <Grid container spacing={4}>
+            {articles.map((article: ArticleProps, i: number) => (
+              <Grid key={i} item xs={12} md={6}>
+                <Link href={'/articles/' + article.id}>
+                  <ArticleCard
+                    title={article.title}
+                    fromToday={article.fromToday}
+                    userName={article.user.name}
+                  />
+                </Link>
+              </Grid>
+            ))}
+          </Grid>
+          <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
+            <Pagination
+              count={meta.totalPages}
+              page={meta.currentPage}
+              onChange={handleChange}
+            />
+          </Box>
+        </Container>
       </Box>
     </>
   )

@@ -85,13 +85,14 @@ const CurrentArticlesEdit: NextPage = () => {
     }
   }, [data])
 
-  const { handleSubmit, control, reset, watch, setValue } = useForm<ArticleFormData>({
-    defaultValues: {
-      title: '',
-      content: '',
-      image: ''
-    }
-  })
+  const { handleSubmit, control, reset, watch, setValue } =
+    useForm<ArticleFormData>({
+      defaultValues: {
+        title: '',
+        content: '',
+        image: ''
+      }
+    })
 
   useEffect(() => {
     if (data) {
@@ -297,7 +298,7 @@ const CurrentArticlesEdit: NextPage = () => {
                 )}
               />
             </Box>
-            
+
             {/* 画像アップロード */}
             <Box sx={{ mb: 2 }}>
               <Typography sx={{ mb: 1, fontWeight: 'bold', color: '#666' }}>
@@ -345,7 +346,7 @@ const CurrentArticlesEdit: NextPage = () => {
                 </Box>
               )}
             </Box>
-            
+
             <Box>
               <Controller
                 name="content"

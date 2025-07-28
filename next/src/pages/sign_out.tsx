@@ -14,6 +14,7 @@ const SignOut: NextPage = () => {
       id: 0,
       name: '',
       email: '',
+      image: '',
       isSignedIn: false,
       isFetched: true
     })

@@ -150,7 +150,8 @@ const Header = () => {
                         textTransform: 'none',
                         fontSize: 16,
                         borderRadius: 2,
-                        width: 100,
+                        minWidth: 100,
+                        whiteSpace: 'nowrap',
                         boxShadow: 'none'
                       }}
                       onClick={addNewArticle}

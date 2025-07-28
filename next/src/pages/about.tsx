@@ -1,16 +1,22 @@
 import { Box, Container, Typography, Stack, Paper } from '@mui/material'
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import { styles } from '@/styles'
 
 const About: NextPage = () => {
   return (
-    <Box
-      css={styles.pageMinHeight}
-      sx={{
-        backgroundColor: '#EDF2F7',
-        py: 4
-      }}
-    >
+    <>
+      <Head>
+        <title>TechLogについて - TechLog</title>
+        <meta name="description" content="TechLogはエンジニアのための技術ナレッジシェアコミュニティです" />
+      </Head>
+      <Box
+        css={styles.pageMinHeight}
+        sx={{
+          backgroundColor: '#EDF2F7',
+          py: 4
+        }}
+      >
       <Container maxWidth="md">
         <Stack spacing={4}>
           <Box sx={{ textAlign: 'center', mb: 4 }}>
@@ -209,7 +215,8 @@ const About: NextPage = () => {
           </Paper>
         </Stack>
       </Container>
-    </Box>
+      </Box>
+    </>
   )
 }
 

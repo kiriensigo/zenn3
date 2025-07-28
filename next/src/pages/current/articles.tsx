@@ -18,6 +18,7 @@ import {
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useState } from 'react'
 import useSWR from 'swr'
@@ -91,13 +92,17 @@ const CurrentArticles: NextPage = () => {
   }
 
   return (
-    <Box
-      css={styles.pageMinHeight}
-      sx={{
-        borderTop: '0.5px solid #acbcc7',
-        pb: 8
-      }}
-    >
+    <>
+      <Head>
+        <title>記事の管理 - TechLog</title>
+      </Head>
+      <Box
+        css={styles.pageMinHeight}
+        sx={{
+          borderTop: '0.5px solid #acbcc7',
+          pb: 8
+        }}
+      >
       <Container maxWidth="md" sx={{ pt: 6, px: 4 }}>
         <Box sx={{ mb: 4 }}>
           <Typography component="h2" sx={{ fontSize: 32, fontWeight: 'bold' }}>
@@ -240,7 +245,8 @@ const CurrentArticles: NextPage = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </Box>
+      </Box>
+    </>
   )
 }
 

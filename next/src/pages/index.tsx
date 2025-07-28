@@ -1,6 +1,7 @@
 import { Box, Grid, Container, Pagination } from '@mui/material'
 import camelcaseKeys from 'camelcase-keys'
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
@@ -37,7 +38,12 @@ const Index: NextPage = () => {
   }
 
   return (
-    <Box css={styles.pageMinHeight} sx={{ backgroundColor: '#e6f2ff' }}>
+    <>
+      <Head>
+        <title>TechLog - エンジニアのための技術ナレッジシェア</title>
+        <meta name="description" content="エンジニアが学んだ技術や知見を気軽に共有できるプラットフォーム" />
+      </Head>
+      <Box css={styles.pageMinHeight} sx={{ backgroundColor: '#e6f2ff' }}>
       <Container maxWidth="md" sx={{ pt: 6 }}>
         <Grid container spacing={4}>
           {articles.map((article: ArticleProps, i: number) => (
@@ -60,7 +66,8 @@ const Index: NextPage = () => {
           />
         </Box>
       </Container>
-    </Box>
+      </Box>
+    </>
   )
 }
 

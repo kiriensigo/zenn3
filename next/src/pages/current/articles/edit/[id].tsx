@@ -1,11 +1,14 @@
 import ArrowBackSharpIcon from '@mui/icons-material/ArrowBackSharp'
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 import { LoadingButton } from '@mui/lab'
 import {
   AppBar,
   Box,
+  Button,
   Card,
   Container,
   IconButton,
+  Input,
   Switch,
   TextField,
   Toolbar,
@@ -15,7 +18,7 @@ import axios, { AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, useRef } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import useSWR from 'swr'
 import Error from '@/components/Error'
@@ -29,11 +32,13 @@ type ArticleProps = {
   title: string
   content: string
   status: string
+  image: string | null
 }
 
 type ArticleFormData = {
   title: string
   content: string
+  image: string
 }
 
 const CurrentArticlesEdit: NextPage = () => {
@@ -45,6 +50,8 @@ const CurrentArticlesEdit: NextPage = () => {
   const [statusChecked, setStatusChecked] = useState<boolean>(false)
   const [isFetched, setIsFetched] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleChangePreviewChecked = () => {
     setPreviewChecked(!previewChecked)
@@ -66,27 +73,79 @@ const CurrentArticlesEdit: NextPage = () => {
       return {
         title: '',
         content: '',
-        status: false
+        status: false,
+        image: null
       }
     }
     return {
       title: data.title == null ? '' : data.title,
       content: data.content == null ? '' : data.content,
-      status: data.status
+      status: data.status,
+      image: data.image || null
     }
   }, [data])
 
-  const { handleSubmit, control, reset, watch } = useForm<ArticleFormData>({
-    defaultValues: article
+  const { handleSubmit, control, reset, watch, setValue } = useForm<ArticleFormData>({
+    defaultValues: {
+      title: '',
+      content: '',
+      image: ''
+    }
   })
 
   useEffect(() => {
     if (data) {
-      reset(article)
+      reset({
+        title: article.title,
+        content: article.content,
+        image: article.image || ''
+      })
       setStatusChecked(article.status == '公開中')
+      setImagePreview(article.image)
       setIsFetched(true)
     }
   }, [data, article, reset])
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      // ファイルサイズチェック (5MB制限)
+      if (file.size > 5 * 1024 * 1024) {
+        setSnackbar({
+          message: '画像サイズは5MB以下にしてください',
+          severity: 'error',
+          pathname: '/current/articles/edit/' + id
+        })
+        return
+      }
+
+      // 画像形式チェック
+      if (!file.type.startsWith('image/')) {
+        setSnackbar({
+          message: '画像ファイルを選択してください',
+          severity: 'error',
+          pathname: '/current/articles/edit/' + id
+        })
+        return
+      }
+
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const result = e.target?.result as string
+        setImagePreview(result)
+        setValue('image', result)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const removeImage = () => {
+    setImagePreview(null)
+    setValue('image', '')
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
+  }
 
   const onSubmit: SubmitHandler<ArticleFormData> = (data) => {
     if (data.title == '') {
@@ -238,6 +297,55 @@ const CurrentArticlesEdit: NextPage = () => {
                 )}
               />
             </Box>
+            
+            {/* 画像アップロード */}
+            <Box sx={{ mb: 2 }}>
+              <Typography sx={{ mb: 1, fontWeight: 'bold', color: '#666' }}>
+                記事画像
+              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Button
+                  variant="outlined"
+                  startIcon={<PhotoCameraIcon />}
+                  onClick={() => fileInputRef.current?.click()}
+                  sx={{ whiteSpace: 'nowrap' }}
+                >
+                  画像を選択
+                </Button>
+                {imagePreview && (
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={removeImage}
+                    size="small"
+                  >
+                    削除
+                  </Button>
+                )}
+                <Input
+                  inputRef={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  sx={{ display: 'none' }}
+                />
+              </Box>
+              {imagePreview && (
+                <Box sx={{ mt: 2 }}>
+                  <img
+                    src={imagePreview}
+                    alt="プレビュー"
+                    style={{
+                      maxWidth: '300px',
+                      maxHeight: '200px',
+                      border: '1px solid #ddd',
+                      borderRadius: '4px'
+                    }}
+                  />
+                </Box>
+              )}
+            </Box>
+            
             <Box>
               <Controller
                 name="content"

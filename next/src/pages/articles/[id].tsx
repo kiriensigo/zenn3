@@ -24,6 +24,7 @@ type ArticleProps = {
   content: string
   createdAt: string
   updatedAt: string
+  image: string | null
   user: {
     name: string
   }
@@ -113,6 +114,20 @@ const ArticleDetail: NextPage = () => {
                   marginTop: { xs: '24px', sm: '40px' }
                 }}
               >
+                {article.image && (
+                  <Box sx={{ mb: 3, textAlign: 'center' }}>
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      style={{
+                        maxWidth: '100%',
+                        height: 'auto',
+                        borderRadius: '8px',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                      }}
+                    />
+                  </Box>
+                )}
                 <MarkdownText content={article.content} />
               </Box>
             </Card>

@@ -32,10 +32,11 @@ class Api::V1::Current::ArticlesController < Api::V1::BaseController
       article.destroy!
       head :no_content
     end
+    
 
   private
 
     def article_params
-      params.require(:article).permit(:title, :content, :status)
+      params.require(:article).permit(:title, :content, :status, :image)
     end
   end

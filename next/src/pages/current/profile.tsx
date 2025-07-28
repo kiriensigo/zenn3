@@ -168,7 +168,7 @@ const CurrentProfile: NextPage = () => {
                   <Input
                     inputRef={fileInputRef}
                     type="file"
-                    accept="image/*"
+                    inputProps={{ accept: 'image/*' }}
                     onChange={handleImageChange}
                     sx={{ display: 'none' }}
                   />

@@ -53,7 +53,10 @@ const Index: NextPage = () => {
           <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
             {articles.map((article: ArticleProps, i: number) => (
               <Grid key={i} item xs={12} sm={6} lg={4}>
-                <Link href={'/articles/' + article.id} style={{ textDecoration: 'none' }}>
+                <Link
+                  href={'/articles/' + article.id}
+                  style={{ textDecoration: 'none' }}
+                >
                   <ArticleCard
                     id={article.id}
                     title={article.title}

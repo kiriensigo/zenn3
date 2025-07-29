@@ -1,13 +1,20 @@
-import { Avatar, Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
-import PersonIcon from '@mui/icons-material/Person'
-import CodeIcon from '@mui/icons-material/Code'
 import ArticleIcon from '@mui/icons-material/Article'
-import LightbulbIcon from '@mui/icons-material/Lightbulb'
-import RocketIcon from '@mui/icons-material/Rocket'
-import WebIcon from '@mui/icons-material/Web'
-import StorageIcon from '@mui/icons-material/Storage'
 import BugReportIcon from '@mui/icons-material/BugReport'
+import CodeIcon from '@mui/icons-material/Code'
+import LightbulbIcon from '@mui/icons-material/Lightbulb'
+import PersonIcon from '@mui/icons-material/Person'
+import RocketIcon from '@mui/icons-material/Rocket'
 import SchoolIcon from '@mui/icons-material/School'
+import StorageIcon from '@mui/icons-material/Storage'
+import WebIcon from '@mui/icons-material/Web'
+import {
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography
+} from '@mui/material'
 import Image from 'next/image'
 
 type ArticleCardProps = {
@@ -18,9 +25,6 @@ type ArticleCardProps = {
   userImage?: string
   articleImage?: string
 }
-
-const omit = (text: string) => (len: number) => (ellipsis: string) =>
-  text.length >= len ? text.slice(0, len - ellipsis.length) + ellipsis : text
 
 const getRandomIcon = (id: number) => {
   const icons = [
@@ -53,10 +57,10 @@ const getRandomGradient = (id: number) => {
 
 const ArticleCard = (props: ArticleCardProps) => {
   return (
-    <Card 
-      sx={{ 
-        height: '100%', 
-        display: 'flex', 
+    <Card
+      sx={{
+        height: '100%',
+        display: 'flex',
         flexDirection: 'column',
         border: '1px solid #e1e8ed',
         borderRadius: '8px',
@@ -92,13 +96,15 @@ const ArticleCard = (props: ArticleCardProps) => {
           {getRandomIcon(props.id)}
         </Box>
       )}
-      <CardContent sx={{ 
-        flexGrow: 1, 
-        display: 'flex', 
-        flexDirection: 'column',
-        p: 3,
-        '&:last-child': { pb: 3 }
-      }}>
+      <CardContent
+        sx={{
+          flexGrow: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          p: 3,
+          '&:last-child': { pb: 3 }
+        }}
+      >
         <Typography
           component="h2"
           sx={{
@@ -116,19 +122,21 @@ const ArticleCard = (props: ArticleCardProps) => {
         >
           {props.title}
         </Typography>
-        <Box sx={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'space-between',
-          mt: 'auto',
-          pt: 2
-        }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            mt: 'auto',
+            pt: 2
+          }}
+        >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-            <Avatar 
-              src={props.userImage || undefined} 
-              sx={{ 
-                width: 32, 
-                height: 32, 
+            <Avatar
+              src={props.userImage || undefined}
+              sx={{
+                width: 32,
+                height: 32,
                 fontSize: 14,
                 border: '2px solid #f0f0f0'
               }}
@@ -136,19 +144,23 @@ const ArticleCard = (props: ArticleCardProps) => {
               {!props.userImage && <PersonIcon fontSize="small" />}
             </Avatar>
             <Box>
-              <Typography sx={{ 
-                fontSize: 14, 
-                fontWeight: 500,
-                color: '#333',
-                lineHeight: 1.2
-              }}>
+              <Typography
+                sx={{
+                  fontSize: 14,
+                  fontWeight: 500,
+                  color: '#333',
+                  lineHeight: 1.2
+                }}
+              >
                 {props.userName}
               </Typography>
-              <Typography sx={{ 
-                fontSize: 12, 
-                color: '#888',
-                lineHeight: 1.2
-              }}>
+              <Typography
+                sx={{
+                  fontSize: 12,
+                  color: '#888',
+                  lineHeight: 1.2
+                }}
+              >
                 {props.fromToday}
               </Typography>
             </Box>

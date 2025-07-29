@@ -48,13 +48,14 @@ const Index: NextPage = () => {
           content="エンジニアが学んだ技術や知見を気軽に共有できるプラットフォーム"
         />
       </Head>
-      <Box css={styles.pageMinHeight} sx={{ backgroundColor: '#e6f2ff' }}>
-        <Container maxWidth="md" sx={{ pt: 6 }}>
-          <Grid container spacing={4}>
+      <Box css={styles.pageMinHeight} sx={{ backgroundColor: '#f8f9fa' }}>
+        <Container maxWidth="lg" sx={{ pt: 6, px: { xs: 2, sm: 3 } }}>
+          <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
             {articles.map((article: ArticleProps, i: number) => (
-              <Grid key={i} item xs={12} md={6}>
-                <Link href={'/articles/' + article.id}>
+              <Grid key={i} item xs={12} sm={6} lg={4}>
+                <Link href={'/articles/' + article.id} style={{ textDecoration: 'none' }}>
                   <ArticleCard
+                    id={article.id}
                     title={article.title}
                     fromToday={article.fromToday}
                     userName={article.user.name}

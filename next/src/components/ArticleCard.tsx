@@ -1,8 +1,17 @@
 import { Avatar, Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person'
+import CodeIcon from '@mui/icons-material/Code'
+import ArticleIcon from '@mui/icons-material/Article'
+import LightbulbIcon from '@mui/icons-material/Lightbulb'
+import RocketIcon from '@mui/icons-material/Rocket'
+import WebIcon from '@mui/icons-material/Web'
+import StorageIcon from '@mui/icons-material/Storage'
+import BugReportIcon from '@mui/icons-material/BugReport'
+import SchoolIcon from '@mui/icons-material/School'
 import Image from 'next/image'
 
 type ArticleCardProps = {
+  id: number
   title: string
   fromToday: string
   userName: string
@@ -13,11 +22,54 @@ type ArticleCardProps = {
 const omit = (text: string) => (len: number) => (ellipsis: string) =>
   text.length >= len ? text.slice(0, len - ellipsis.length) + ellipsis : text
 
+const getRandomIcon = (id: number) => {
+  const icons = [
+    CodeIcon,
+    ArticleIcon,
+    LightbulbIcon,
+    RocketIcon,
+    WebIcon,
+    StorageIcon,
+    BugReportIcon,
+    SchoolIcon
+  ]
+  const IconComponent = icons[id % icons.length]
+  return <IconComponent />
+}
+
+const getRandomGradient = (id: number) => {
+  const gradients = [
+    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+    'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+    'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+    'linear-gradient(135deg, #ff8a80 0%, #ea4c89 100%)'
+  ]
+  return gradients[id % gradients.length]
+}
+
 const ArticleCard = (props: ArticleCardProps) => {
   return (
-    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      {props.articleImage && (
-        <CardMedia sx={{ height: 140, position: 'relative' }}>
+    <Card 
+      sx={{ 
+        height: '100%', 
+        display: 'flex', 
+        flexDirection: 'column',
+        border: '1px solid #e1e8ed',
+        borderRadius: '8px',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        transition: 'all 0.2s ease-in-out',
+        '&:hover': {
+          transform: 'translateY(-2px)',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+        }
+      }}
+    >
+      {props.articleImage ? (
+        <CardMedia sx={{ height: 200, position: 'relative' }}>
           <Image
             src={props.articleImage}
             alt={props.title}
@@ -25,32 +77,82 @@ const ArticleCard = (props: ArticleCardProps) => {
             style={{ objectFit: 'cover' }}
           />
         </CardMedia>
-      )}
-      <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-        <Typography
-          component="h3"
+      ) : (
+        <Box
           sx={{
-            mb: 2,
-            minHeight: 48,
-            fontSize: 16,
-            fontWeight: 'bold',
-            lineHeight: 1.5,
-            flexGrow: 1
+            height: 200,
+            background: getRandomGradient(props.id),
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontSize: 48
           }}
         >
-          {omit(props.title)(45)('...')}
+          {getRandomIcon(props.id)}
+        </Box>
+      )}
+      <CardContent sx={{ 
+        flexGrow: 1, 
+        display: 'flex', 
+        flexDirection: 'column',
+        p: 3,
+        '&:last-child': { pb: 3 }
+      }}>
+        <Typography
+          component="h2"
+          sx={{
+            mb: 2,
+            fontSize: 18,
+            fontWeight: 600,
+            lineHeight: 1.4,
+            color: '#1a1a1a',
+            overflow: 'hidden',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            minHeight: 50
+          }}
+        >
+          {props.title}
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 'auto' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box sx={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'space-between',
+          mt: 'auto',
+          pt: 2
+        }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
             <Avatar 
               src={props.userImage || undefined} 
-              sx={{ width: 24, height: 24, fontSize: 12 }}
+              sx={{ 
+                width: 32, 
+                height: 32, 
+                fontSize: 14,
+                border: '2px solid #f0f0f0'
+              }}
             >
               {!props.userImage && <PersonIcon fontSize="small" />}
             </Avatar>
-            <Typography sx={{ fontSize: 12 }}>{props.userName}</Typography>
+            <Box>
+              <Typography sx={{ 
+                fontSize: 14, 
+                fontWeight: 500,
+                color: '#333',
+                lineHeight: 1.2
+              }}>
+                {props.userName}
+              </Typography>
+              <Typography sx={{ 
+                fontSize: 12, 
+                color: '#888',
+                lineHeight: 1.2
+              }}>
+                {props.fromToday}
+              </Typography>
+            </Box>
           </Box>
-          <Typography sx={{ fontSize: 12, color: '#666' }}>{props.fromToday}</Typography>
         </Box>
       </CardContent>
     </Card>

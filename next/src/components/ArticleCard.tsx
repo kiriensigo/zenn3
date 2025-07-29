@@ -90,7 +90,10 @@ const ArticleCard = (props: ArticleCardProps) => {
             alignItems: 'center',
             justifyContent: 'center',
             color: 'white',
-            fontSize: 48
+            '& svg': {
+              fontSize: 80,
+              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
+            }
           }}
         >
           {getRandomIcon(props.id)}

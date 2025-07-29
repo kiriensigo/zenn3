@@ -16,8 +16,10 @@ type ArticleProps = {
   title: string
   createdAt: string
   fromToday: string
+  image?: string
   user: {
     name: string
+    image?: string
   }
 }
 
@@ -56,6 +58,8 @@ const Index: NextPage = () => {
                     title={article.title}
                     fromToday={article.fromToday}
                     userName={article.user.name}
+                    userImage={article.user.image}
+                    articleImage={article.image}
                   />
                 </Link>
               </Grid>

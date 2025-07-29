@@ -278,10 +278,10 @@ const CurrentArticlesEdit: NextPage = () => {
       </AppBar>
       <Container
         maxWidth="lg"
-        sx={{ pt: 11, pb: 3, display: 'flex', justifyContent: 'center' }}
+        sx={{ pt: 11, pb: 3, display: 'flex', justifyContent: 'center', px: { xs: 2, sm: 3 } }}
       >
         {!previewChecked && (
-          <Box sx={{ width: 840 }}>
+          <Box sx={{ width: { xs: '100%', sm: 840 } }}>
             <Box sx={{ mb: 2 }}>
               <Controller
                 name="title"
@@ -372,7 +372,7 @@ const CurrentArticlesEdit: NextPage = () => {
           </Box>
         )}
         {previewChecked && (
-          <Box sx={{ width: 840 }}>
+          <Box sx={{ width: { xs: '100%', sm: 840 } }}>
             <Typography
               component="h2"
               sx={{

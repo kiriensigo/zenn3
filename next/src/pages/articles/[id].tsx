@@ -1,8 +1,10 @@
 import ArticleIcon from '@mui/icons-material/Article'
+import EditIcon from '@mui/icons-material/Edit'
 import PersonIcon from '@mui/icons-material/Person'
 import UpdateIcon from '@mui/icons-material/Update'
 import {
   Box,
+  Button,
   Container,
   Typography,
   Card,
@@ -13,11 +15,13 @@ import {
 import camelcaseKeys from 'camelcase-keys'
 import type { NextPage } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import Error from '@/components/Error'
 import Loading from '@/components/Loading'
 import MarkdownText from '@/components/MarkdownText'
+import { useUserState } from '@/hooks/useGlobalState'
 import { fetcher } from '@/utils'
 
 type ArticleProps = {
@@ -27,12 +31,14 @@ type ArticleProps = {
   updatedAt: string
   image: string | null
   user: {
+    id: number
     name: string
   }
 }
 
 const ArticleDetail: NextPage = () => {
   const router = useRouter()
+  const [user] = useUserState()
   const url = process.env.NEXT_PUBLIC_API_BASE_URL + '/articles/'
   const { id } = router.query
 
@@ -41,6 +47,7 @@ const ArticleDetail: NextPage = () => {
   if (!data) return <Loading />
 
   const article: ArticleProps = camelcaseKeys(data)
+  const isAuthor = user.isSignedIn && user.id === article.user.id
 
   return (
     <Box
@@ -78,11 +85,32 @@ const ArticleDetail: NextPage = () => {
               component="h2"
               sx={{
                 fontSize: { xs: 21, sm: 25 },
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                mb: isAuthor ? 2 : 0
               }}
             >
               {article.title}
             </Typography>
+            {isAuthor && (
+              <Box sx={{ mt: 2, mb: 2 }}>
+                <Link href={`/current/articles/edit/${id}`}>
+                  <Button
+                    variant="outlined"
+                    startIcon={<EditIcon />}
+                    sx={{
+                      borderColor: '#3EA8FF',
+                      color: '#3EA8FF',
+                      '&:hover': {
+                        backgroundColor: '#3EA8FF',
+                        color: 'white'
+                      }
+                    }}
+                  >
+                    記事を編集
+                  </Button>
+                </Link>
+              </Box>
+            )}
           </Box>
           <Typography
             component="p"

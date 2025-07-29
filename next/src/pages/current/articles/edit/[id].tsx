@@ -392,6 +392,22 @@ const CurrentArticlesEdit: NextPage = () => {
                   marginTop: { xs: '24px', sm: '40px' }
                 }}
               >
+                {(imagePreview || watch('image')) && (
+                  <Box sx={{ mb: 3, textAlign: 'center' }}>
+                    <Image
+                      src={imagePreview || watch('image')}
+                      alt={watch('title') || 'プレビュー'}
+                      width={600}
+                      height={400}
+                      style={{
+                        maxWidth: '100%',
+                        height: 'auto',
+                        borderRadius: '8px',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                      }}
+                    />
+                  </Box>
+                )}
                 <MarkdownText content={watch('content')} />
               </Box>
             </Card>

@@ -2,9 +2,20 @@ name: Wake Up Render Apps
 
 on:
   schedule:
-    - cron: '*/12 * * * *'
+    - cron: "*/12 * * * *"
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.4" # ここでRubyバージョンを指定
+          bundler-cache: true # Gemfile.lockに基づいてgemをキャッシュ
+      - name: Install dependencies
+        run: bundle install
   wake-up:
     runs-on: ubuntu-latest
     steps:

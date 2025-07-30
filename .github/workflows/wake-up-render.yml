@@ -3,6 +3,7 @@ name: Wake Up Render Apps
 on:
   schedule:
     - cron: "*/12 * * * *"
+  workflow_dispatch:
 
 jobs:
   wake-up:

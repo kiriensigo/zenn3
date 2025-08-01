@@ -77,7 +77,13 @@ const Header = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Link href="/">
-              <Image src="/logo.png" width={133} height={40} alt="logo" />
+              <Image
+                src="/logo.png"
+                width={133}
+                height={40}
+                alt="logo"
+                priority
+              />
             </Link>
             <Link href="/about">
               <Button

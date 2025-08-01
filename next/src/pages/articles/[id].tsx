@@ -156,6 +156,9 @@ const ArticleDetail: NextPage = () => {
                         borderRadius: '8px',
                         boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
                       }}
+                      priority
+                      placeholder="blur"
+                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjZjNmNGY2Ii8+Cjwvc3ZnPgo="
                     />
                   </Box>
                 )}

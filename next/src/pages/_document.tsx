@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import createEmotionServer from '@emotion/server/create-instance'
 import { RenderPageResult } from 'next/dist/shared/lib/utils'
 import Document, {

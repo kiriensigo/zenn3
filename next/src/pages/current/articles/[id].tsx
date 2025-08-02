@@ -1,6 +1,8 @@
-import ArticleIcon from '@mui/icons-material/Article'
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import SettingsIcon from '@mui/icons-material/Settings'
+import {
+  ArticleIcon,
+  ChevronLeftIcon,
+  SettingsIcon
+} from '@/components/icons/LightweightIcons'
 import {
   Avatar,
   Box,

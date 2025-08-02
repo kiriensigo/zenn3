@@ -1,6 +1,8 @@
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
+import {
+  ChevronRightIcon,
+  DeleteIcon,
+  EditIcon
+} from '@/components/icons/LightweightIcons'
 import {
   Avatar,
   Box,

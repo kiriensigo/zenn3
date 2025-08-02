@@ -1,7 +1,9 @@
-import ArticleIcon from '@mui/icons-material/Article'
-import Logout from '@mui/icons-material/Logout'
-import PersonIcon from '@mui/icons-material/Person'
-import SettingsIcon from '@mui/icons-material/Settings'
+import {
+  ArticleIcon,
+  LogoutIcon,
+  PersonIcon,
+  SettingsIcon
+} from '@/components/icons/LightweightIcons'
 import {
   AppBar,
   Avatar,
@@ -197,7 +199,7 @@ const Header = () => {
                     <Link href="/sign_out">
                       <MenuItem>
                         <ListItemIcon>
-                          <Logout fontSize="small" />
+                          <LogoutIcon fontSize="small" />
                         </ListItemIcon>
                         ログアウト
                       </MenuItem>

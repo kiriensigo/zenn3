@@ -1,6 +1,8 @@
-import ArrowBackSharpIcon from '@mui/icons-material/ArrowBackSharp'
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
-import { LoadingButton } from '@mui/lab'
+import {
+  ChevronLeftIcon as ArrowBackSharpIcon,
+  PhotoCameraIcon
+} from '@/components/icons/LightweightIcons'
+import LightweightLoadingButton from '@/components/LightweightLoadingButton'
 import {
   AppBar,
   Box,
@@ -261,7 +263,7 @@ const CurrentArticlesEdit: NextPage = () => {
                 下書き／公開
               </Typography>
             </Box>
-            <LoadingButton
+            <LightweightLoadingButton
               variant="contained"
               type="submit"
               loading={isLoading}
@@ -272,7 +274,7 @@ const CurrentArticlesEdit: NextPage = () => {
               }}
             >
               更新する
-            </LoadingButton>
+            </LightweightLoadingButton>
           </Box>
         </Toolbar>
       </AppBar>

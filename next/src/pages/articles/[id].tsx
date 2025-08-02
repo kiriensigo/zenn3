@@ -1,7 +1,8 @@
-import ArticleIcon from '@mui/icons-material/Article'
-import EditIcon from '@mui/icons-material/Edit'
-import PersonIcon from '@mui/icons-material/Person'
-import UpdateIcon from '@mui/icons-material/Update'
+import {
+  ArticleIcon,
+  EditIcon,
+  PersonIcon
+} from '@/components/icons/LightweightIcons'
 import {
   Box,
   Button,
@@ -226,7 +227,7 @@ const ArticleDetail: NextPage = () => {
                   >
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                       <Box sx={{ pr: 1 }}>
-                        <UpdateIcon />
+                        <ArticleIcon />
                       </Box>
                       <ListItemText primary="本文更新" />
                     </Box>

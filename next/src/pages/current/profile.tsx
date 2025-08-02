@@ -1,4 +1,4 @@
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
+import { PhotoCameraIcon } from '@/components/icons/LightweightIcons'
 import {
   Avatar,
   Box,

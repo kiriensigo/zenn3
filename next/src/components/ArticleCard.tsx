@@ -1,12 +1,10 @@
-import ArticleIcon from '@mui/icons-material/Article'
-import BugReportIcon from '@mui/icons-material/BugReport'
-import CodeIcon from '@mui/icons-material/Code'
-import LightbulbIcon from '@mui/icons-material/Lightbulb'
-import PersonIcon from '@mui/icons-material/Person'
-import RocketIcon from '@mui/icons-material/Rocket'
-import SchoolIcon from '@mui/icons-material/School'
-import StorageIcon from '@mui/icons-material/Storage'
-import WebIcon from '@mui/icons-material/Web'
+import {
+  ArticleIcon,
+  PersonIcon,
+  CodeIcon,
+  LightbulbIcon,
+  RocketIcon
+} from '@/components/icons/LightweightIcons'
 import {
   Avatar,
   Box,
@@ -32,10 +30,10 @@ const getRandomIcon = (id: number) => {
     ArticleIcon,
     LightbulbIcon,
     RocketIcon,
-    WebIcon,
-    StorageIcon,
-    BugReportIcon,
-    SchoolIcon
+    ArticleIcon, // WebIconの代替
+    CodeIcon,    // StorageIconの代替  
+    ArticleIcon, // BugReportIconの代替
+    LightbulbIcon // SchoolIconの代替
   ]
   const IconComponent = icons[id % icons.length]
   return <IconComponent />

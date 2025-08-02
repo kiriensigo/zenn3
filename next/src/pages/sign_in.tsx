@@ -1,4 +1,4 @@
-import { LoadingButton } from '@mui/lab'
+import LightweightLoadingButton from '@/components/LightweightLoadingButton'
 import { Box, Container, TextField, Typography, Stack } from '@mui/material'
 import axios, { AxiosResponse, AxiosError } from 'axios'
 import type { NextPage } from 'next'
@@ -115,14 +115,14 @@ const SignIn: NextPage = () => {
               />
             )}
           />
-          <LoadingButton
+          <LightweightLoadingButton
             variant="contained"
             type="submit"
             loading={isLoading}
             sx={{ fontWeight: 'bold', color: 'white' }}
           >
             送信する
-          </LoadingButton>
+          </LightweightLoadingButton>
         </Stack>
       </Container>
     </Box>

@@ -2,5 +2,10 @@
 DEPLOY_ROADMAP.md
 DEPLOY_RULES.md
 
-# Claude AI assistant files
+# AI-generated files and traces
 .claude
+*.ai-generated
+*_ai_*
+*-ai-*
+commit_message.txt
+CLAUDE.md
